@@ -1,7 +1,15 @@
-import { Component } from "react";
-import '../css/ProfileTop.css'
-import { Container, Row, Col } from "react-bootstrap";
-import {CameraOutline} from "react-ionicons";
+import {Component} from "react";
+import "../css/ProfileTop.css";
+import {
+	Container,
+	Row,
+	Col,
+	Dropdown,
+	Button,
+	Alert,
+	Carousel,
+} from "react-bootstrap";
+import {Camera, PencilOutline} from "react-ionicons";
 
 export default class ProfileTop extends Component {
 	constructor(props) {
@@ -11,20 +19,6 @@ export default class ProfileTop extends Component {
 		};
 	}
 
-	// {
-	//     "_id": "6098fa41619e5d00151f8f7f",
-	//     "name": "Hasib",
-	//     "surname": "Darwish",
-	//     "email": "hashhash506@gmail.com",
-	//     "username": "Hasib",
-	//     "title": "Full Stocker Web Developer",
-	//     "bio": "this is just me who think i am who am i",
-	//     "area": "Birmingham, United Kingdome",
-	//     "image": "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png",
-	//     "createdAt": "2021-05-10T09:17:53.741Z",
-	//     "updatedAt": "2021-05-10T09:17:53.741Z",
-	//     "__v": 0
-	// }
 	getProfile = async () => {
 		try {
 			const requestProfile = await fetch(
@@ -54,21 +48,119 @@ export default class ProfileTop extends Component {
 		return (
 			<>
 				<Container>
-					<Row className="mt-3">
-						<Col id="backgroundImage" sx={9}>
-							
-							<CameraOutline
+					<Row className="m-0 mt-3 p-0">
+						<Col id="ProfileBackground" sx={12}>
+							<Camera
+								className="cameraIcon"
 								color={"#0a66c2"}
 								title={"camra"}
-								height="250px"
-								width="250px"
+								height="30px"
+								width="30px"
 							/>
 							<img
 								id="profileImage"
 								src={this.state.profile.image}
 								alt="profile_image"
 							/>
-							hello
+							<PencilOutline
+								className="Pencil"
+								color={"#656161"}
+								title={"pencil"}
+								height="40px"
+								width="100px"
+							/>
+						</Col>
+						<Col id="ProfileInfo" xs={12}>
+							<h3>
+								{this.state.profile.name}
+								{"  "}
+								{this.state.profile.surname}
+							</h3>
+							<h5 style={{fontWeight: "400"}}>{this.state.profile.title}</h5>
+							<p>
+								{this.state.profile.area}
+								{" - "}
+								<a href="">
+									<span>500 onnections</span>
+								</a>
+								{" - "}
+								<a href="">
+									<span>Contact info</span>
+								</a>
+							</p>{" "}
+							<span className="d-flex flex-row">
+								<Dropdown>
+									<Dropdown.Toggle
+										style={{borderRadius: "50px", marginRight: "10px"}}
+										variant="primary"
+										id="dropdown-basic"
+									>
+										Open to
+									</Dropdown.Toggle>
+
+									<Dropdown.Menu>
+										<Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+										<Dropdown.Item href="#/action-2">
+											Another action
+										</Dropdown.Item>
+										<Dropdown.Item href="#/action-3">
+											Something else
+										</Dropdown.Item>
+									</Dropdown.Menu>
+								</Dropdown>
+
+								<Dropdown className="mr-2 pr-5">
+									<Dropdown.Toggle
+										style={{borderRadius: "50px", marginRight: "10px"}}
+										variant="outline-dark"
+										border="dark"
+										id="dropdown-basic"
+									>
+										Add profile section
+									</Dropdown.Toggle>
+
+									<Dropdown.Menu>
+										<Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+										<Dropdown.Item href="#/action-2">
+											Another action
+										</Dropdown.Item>
+										<Dropdown.Item href="#/action-3">
+											Something else
+										</Dropdown.Item>
+									</Dropdown.Menu>
+								</Dropdown>
+
+								<Button
+									style={{borderRadius: "50px", marginRight: "10px"}}
+									variant="outline-dark"
+								>
+									More...
+								</Button>
+							</span>
+							<Row>
+								<Carousel interval={null}>
+									<Carousel.Item>
+										<Row>
+											<Col sx={8}>
+												<Alert variant="info">Jumbo</Alert>
+											</Col>
+											<Col sx={8}>
+												<Alert variant="info">Jumbo</Alert>
+											</Col>
+										</Row>
+									</Carousel.Item>
+									<Carousel.Item>
+										<Row>
+											<Col sx={6}>
+												<Alert variant="info">Jumbo</Alert>
+											</Col>
+											<Col sx={6}>
+												<Alert variant="info">Jumbo</Alert>
+											</Col>
+										</Row>
+									</Carousel.Item>
+								</Carousel>
+							</Row>
 						</Col>
 					</Row>
 				</Container>
