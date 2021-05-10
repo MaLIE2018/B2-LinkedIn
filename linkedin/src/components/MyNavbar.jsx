@@ -1,4 +1,13 @@
 import React from 'react';
+import Search from './SearchIcon';
+import { Home } from 'react-ionicons';
+import { People } from 'react-ionicons';
+import { Briefcase } from 'react-ionicons';
+import { ChatboxEllipses } from 'react-ionicons';
+import { Notifications } from 'react-ionicons';
+import { PersonCircle } from 'react-ionicons';
+import { Keypad } from 'react-ionicons';
+
 import {
 	Navbar,
 	Nav,
@@ -6,7 +15,6 @@ import {
 	Button,
 	NavDropdown,
 	FormControl,
-	Container,
 	Row,
 	Col,
 	Image,
@@ -19,25 +27,87 @@ class MyNavbar extends React.Component {
 	state = {};
 	render() {
 		return (
-			<Container>
-				<Navbar bg="white" expand="lg">
-					<Navbar.Brand>
-						<Image src={mainLogo} roundedCircle className="try" />
-					</Navbar.Brand>
-					<Form inline>
-						<FormControl type="text" placeholder="Search" className="mr-sm-2" />
-					</Form>
+			<Navbar
+				className="nav-styles"
+				bg="white"
+				expand="lg"
+				style={{ height: '55px' }}
+			>
+				<Navbar.Brand>
+					<Image src={mainLogo} rounded className="linkedin_logo" />
+				</Navbar.Brand>
 
-					<Navbar.Toggle aria-controls="basic-navbar-nav" />
-					<Navbar.Collapse id="basic-navbar-nav">
-						<Nav className="mr-auto">
-							<Nav.Link href="#home">Home</Nav.Link>
-							<Nav.Link href="#link">My Networks</Nav.Link>
-							<Nav.Link href="#link">MyNetworks</Nav.Link>
-							<Nav.Link href="#link">Messaging</Nav.Link>
-							<Nav.Link href="#link">Notifications</Nav.Link>
-							<NavDropdown title="Dropdown" id="basic-nav-dropdown">
-								<NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+				<Form className="searchBar" inline>
+					<FormControl type="text" placeholder="Search"></FormControl>
+				</Form>
+
+				<Navbar.Toggle aria-controls="basic-navbar-nav" />
+				<Navbar.Collapse id="basic-navbar-nav">
+					<Nav>
+						<Nav.Link href="#home">
+							<div className="d-flex justify-content-center align-items-center">
+								<Home color={'#00000'} title={''} height="20px" width="20px" />{' '}
+							</div>
+							<span>Home</span>
+						</Nav.Link>
+						<Nav.Link href="#link">
+							<div className="d-flex justify-content-center align-items-center">
+								<People
+									color={'#00000'}
+									title={''}
+									height="20px"
+									width="20px"
+								/>
+							</div>
+							<span>My Networks</span>
+						</Nav.Link>
+						<Nav.Link href="#link">
+							<div className="d-flex justify-content-center align-items-center">
+								<Briefcase
+									color={'#00000'}
+									title={''}
+									height="20px"
+									width="20px"
+								/>
+							</div>
+							<span>Jobs</span>
+						</Nav.Link>
+						<Nav.Link href="#link">
+							<div className="d-flex justify-content-center align-items-center">
+								<ChatboxEllipses
+									color={'#00000'}
+									title={''}
+									height="20px"
+									width="20px"
+								/>
+							</div>
+							<span>Messaging</span>
+						</Nav.Link>
+						<Nav.Link href="#link">
+							<div className="d-flex justify-content-center align-items-center">
+								<Notifications
+									color={'#00000'}
+									title={''}
+									height="20px"
+									width="20px"
+								/>
+							</div>
+							<span>Notifications</span>
+						</Nav.Link>
+						<div>
+							<span>
+								<PersonCircle
+									color={'#00000'}
+									title={''}
+									height="20px"
+									width="20px"
+								/>
+							</span>
+
+							<NavDropdown title="Me" id="basic-nav-dropdown">
+								<NavDropdown.Item href="#action/3.1">
+									Ankit Kumar
+								</NavDropdown.Item>
 								<NavDropdown.Item href="#action/3.2">
 									Another action
 								</NavDropdown.Item>
@@ -49,10 +119,39 @@ class MyNavbar extends React.Component {
 									Separated link
 								</NavDropdown.Item>
 							</NavDropdown>
-						</Nav>
-					</Navbar.Collapse>
-				</Navbar>
-			</Container>
+						</div>
+						<div className="vr"></div>
+						<div>
+							<span>
+								<Keypad
+									className="user-icon"
+									color={'#00000'}
+									title={''}
+									height="20px"
+									width="20px"
+								/>
+							</span>
+							<NavDropdown title="Work" id="basic-nav-dropdown">
+								<NavDropdown.Item href="#action/3.1">
+									Ankit Kumar
+								</NavDropdown.Item>
+								<NavDropdown.Item href="#action/3.2">
+									Another action
+								</NavDropdown.Item>
+								<NavDropdown.Item href="#action/3.3">
+									Something
+								</NavDropdown.Item>
+								<NavDropdown.Divider />
+								<NavDropdown.Item href="#action/3.4">
+									Separated link
+								</NavDropdown.Item>
+							</NavDropdown>
+						</div>
+
+						<Nav.Link className="premium d-flex justify-content-center align-items-center"></Nav.Link>
+					</Nav>
+				</Navbar.Collapse>
+			</Navbar>
 		);
 	}
 }

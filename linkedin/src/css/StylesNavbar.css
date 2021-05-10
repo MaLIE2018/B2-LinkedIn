@@ -1,4 +1,35 @@
-.try {
-	height: 80px;
-	width: 100px;
+.linkedin_logo {
+	height: 33px;
+	width: 33px;
 }
+.nav-styles {
+	padding-left: 9em;
+	padding-right: 9em;
+}
+.searchBar input {
+	margin-right: 10rem;
+	line-height: 2.3px;
+	border: none;
+	background-color: #eef3f8;
+	width: 15rem;
+	height: 2.5rem;
+}
+.user-icon {
+	margin-left: 10px;
+	margin-bottom: none;
+}
+.vr {
+	border-left: 0.5px solid rgb(223, 223, 223);
+	height: 55px;
+	margin-left: 20px;
+}
+.premium {
+	font-size: smaller;
+}
+/* div.dropdown a {
+	padding: 0;
+	display: flex;
+	/* justify-content: center; */
+/* align-items: center; */
+/* flex-direction: column; */
+/* } */
