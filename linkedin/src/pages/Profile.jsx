@@ -1,16 +1,17 @@
 import React, { Component } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
+import Box from "../components/Box";
 class Profile extends Component {
   render() {
     return (
-      <Container sm='fluid'>
-        <Row>
-          <Col md={8} className='bg-primary'></Col>
-          <Col md={4} className='bg-light'>
-            Test
-          </Col>
-        </Row>
-      </Container>
+      <Row>
+        <Col md={8}>
+          <Box />
+        </Col>
+        <Col md={4}>
+          <Box />
+        </Col>
+      </Row>
     );
   }
 }
