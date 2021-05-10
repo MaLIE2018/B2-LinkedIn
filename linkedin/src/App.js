@@ -1,8 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Footer from './components/Footer';
 import './css/App.css';
 import Profile from './pages/Profile';
 import { Container } from 'react-bootstrap';
+import Footer from './components/Footer';
+
 function App() {
   return (
     <>

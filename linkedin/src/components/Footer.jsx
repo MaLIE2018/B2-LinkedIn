@@ -1,64 +1,66 @@
-import { Container, Col, Row } from "react-bootstrap"
+// import { Container, Col, Row } from "react-bootstrap"
+import { DropdownButton, Dropdown, Col, Row, } from "react-bootstrap";
 import { HelpCircle } from 'react-ionicons'
 import { Flower } from 'react-ionicons'
-
+import Footercss from '../css/Footer.css'
 
 const Footer = () => {
     return (
-        <Container id="footer">
+
+        <footer id="footer">
+            <img
+                src="https://via.placeholder.com/500x500"
+                alt="LinkedIn logo"
+                width="50rem"
+              />
             <Row>
                 <div className="col-md-2">
                     <nav>
                         
-                        <li class="py-1">
-                            <a class="text-muted" href="#">
+                        <li className="py-1">
+                            <a className="text-muted" href="#">
                                 About
                             </a>
                         </li>
-                        <li class="py-1">
-                            <a class="text-muted" href="#">
+                        <li className="py-1">
+                            <a className="text-muted" href="#">
                                 Community Guidelines
                             </a>
                         </li>
-                        <li class="py-1">
-                            <a class="text-muted" href="#">
+                        <li className="py-1">
+                            <a className="text-muted" href="#">
                                 Privacy and Terms
                             </a>
                         </li>
-                        <li class="py-1">
-                            <a class="text-muted" href="#">
+                        <li className="py-1">
+                            <a className="text-muted" href="#">
                                 Sales Solutions
                             </a>
                         </li>
                         <li class="py-1">
-                            <a class="text-muted" href="#">Safety Center</a>
-                        </li>
-                        <li class="py-1 mt-3">
-                            <a class="text-muted" href="#">
-                               LinkedIn Corporation © 2021
-                            </a>
+                            <a className="text-muted" href="#">Safety Center</a>
                         </li>
                     </nav>
                 </div>
                 <Col className="col-md-2">
                     <nav>
-                        <li class="py-1">
-                            <a class="text-muted" href="#">
+                        <li className="py-1">
+                            <a className="text-muted" href="#">
                                 Accessibility
                             </a>
                         </li>
-                        <li class="py-1">
-                            <a class="text-muted" href="#">
+                        <li className="py-1">
+                            <a className="text-muted" href="#">
                                 Careers
                             </a>
                         </li>
-                        <li class="py-1">
-                            <a class="text-muted" href="#">
+                        <li className="py-1">
+                            <a className="text-muted" href="#">
                                 Ad choices
                             </a>
                         </li>
-                        <li class="py-1">
-                            <a class="text-muted" href="#">
+                        <li className="py-1">
+                            <a className="text-muted" href="#">
                                 Mobile
                             </a>
                         </li>
@@ -66,23 +68,23 @@ const Footer = () => {
                 </Col>
                 <Col className="col-md-2">
                     <nav>
-                        <li class="py-1">
-                            <a class="text-muted" href="#">
+                        <li className="py-1">
+                            <a className="text-muted" href="#">
                                 Talent Solutions
                             </a>
                         </li>
-                        <li class="py-1">
-                            <a class="text-muted" href="#">
+                        <li className="py-1">
+                            <a className="text-muted" href="#">
                                 Marketing Solutions
                             </a>
                         </li>
-                        <li class="py-1">
-                            <a class="text-muted" href="#">
+                        <li className="py-1">
+                            <a className="text-muted" href="#">
                                 Advertising
                             </a>
                         </li>
-                        <li class="py-1">
-                            <a class="text-muted" href="#">
+                        <li className="py-1">
+                            <a className="text-muted" href="#">
                                 Small Business
                             </a>
                         </li>
@@ -90,18 +92,18 @@ const Footer = () => {
                 </Col>
                 <Col className="col-md-2">
                     <nav>
-                        <li class="py-1">
-                            <a class="text-muted" href="#">
+                        <li className="py-1">
+                            <a className="text-muted" href="#">
                                 Gift Cards
                             </a>
                         </li>
-                        <li class="py-1">
-                            <a class="text-muted" href="#">
+                        <li className="py-1">
+                            <a className="text-muted" href="#">
                                 Terms Of Use
                             </a>
                         </li>
-                        <li class="py-1">
-                            <a class="text-muted" href="#">
+                        <li className="py-1">
+                            <a className="text-muted" href="#">
                                 Corporate Information
                             </a>
                         </li>
@@ -109,7 +111,7 @@ const Footer = () => {
                 </Col>
                 <Col className="col-md-2">
                     <ul>
-                        <li className='display-flex mb-4'>
+                        <li className='display-flex mb-2'>
                         <HelpCircle
                             color={'#4e4e4e'} 
                             title={'help'}
@@ -117,8 +119,8 @@ const Footer = () => {
                             width="25px"
                         />
                         <span>
-                            <a class="text-muted" href="#">Questions?</a>
-                            <p class="text-muted">Visit our help center.</p>
+                            <a className="text-muted" href="#">Questions?</a>
+                            <p className="text-muted text">Visit our help center.</p>
                         </span>
 
                         </li>
@@ -131,16 +133,36 @@ const Footer = () => {
                         />
 
                         <a className="text-muted" href="#">Manage your account and privacy</a>
-                        <p className="text-muted">Go to your settings.</p>
+                        <p className="text-muted text">Go to your settings.</p>
                         </li>
                     </ul>
                 </Col>
                 <Col className="col-md-2">
                     <label className="text-muted">Select language</label>
-                    <select></select>
+                    <DropdownButton
+                    variant="outline-secondary"
+                    title={` Language `}
+                    >
+                    <Dropdown.Item>
+                        <p className="dropdownText">العربية (Arabic)</p>
+                    </Dropdown.Item>
+                    <Dropdown.Item>
+                        <p className="dropdownText">čeština (Czech)</p>
+                    </Dropdown.Item>
+                    <Dropdown.Item>
+                        <p className="dropdownText">Dansk (Danish)</p>
+                    </Dropdown.Item>
+                    <Dropdown.Item>
+                        <p className="dropdownText">Detusch (German)</p>
+                    </Dropdown.Item>
+                    </DropdownButton>
                 </Col>
             </Row>
-        </Container>
+            <div><p className="text-muted copyright" >
+                    LinkedIn Corporation © 2021
+                </p>
+            </div>
+        </footer>
     )
 }
 
