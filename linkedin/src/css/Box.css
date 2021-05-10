@@ -10,6 +10,14 @@
   overflow: hidden;
 }
 
-.edit-button {
-  margin-left: auto;
+.card button:hover {
+  text-decoration: underline;
+}
+
+.card-footer {
+  cursor: pointer;
+}
+
+.card-footer:hover {
+  background-color: #ebebeb;
 }
