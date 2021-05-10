@@ -7,4 +7,9 @@
 
 .card-body {
   color: var(--main-text-color);
+  overflow: hidden;
+}
+
+.edit-button {
+  margin-left: auto;
 }
