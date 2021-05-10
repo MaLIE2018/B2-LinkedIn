@@ -1,4 +1,5 @@
-import {Component} from "react";
+import { Component } from "react";
+import '../css/ProfileTop.css'
 import { Container, Row, Col } from "react-bootstrap";
 import {CameraOutline} from "react-ionicons";
 
