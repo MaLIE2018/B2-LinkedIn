@@ -1,0 +1,13 @@
+#backgroundImage{
+    position: relative;
+    background-image: url("https://source.unsplash.com/user/erondu/600x150");
+    height: 15vh;
+}
+#profileImage{
+    width:100px;
+    height:100px;
+    border-radius: 50%;
+    position: absolute;
+    top: 70px;
+    left: 20px;
+}

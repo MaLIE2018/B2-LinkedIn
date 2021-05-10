@@ -1,22 +1,20 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import MyNavbar from './components/MyNavbar';
+import Footer from './components/Footer';
 import './css/App.css';
 import Profile from './pages/Profile';
-import {Container} from "react-bootstrap"
+import { Container } from 'react-bootstrap';
+import MyNavbar from './components/MyNavbar'
 function App() {
-<<<<<<< Updated upstream
   return (
-    <Container sm='fluid'>
-    <Profile/>
-    </Container>
+    <>
+    <MyNavbar />
+      <Container sm="fluid">
+        <Profile />
+        
+      </Container>
+      <Footer />
+    </>
   );
-=======
-	return (
-		<div>
-			<MyNavbar />
-		</div>
-	);
->>>>>>> Stashed changes
 }
 
 export default App;
