@@ -23,11 +23,11 @@ class ListItem extends Component {
               {edit && <EditButton />}
             </div>
             <span className='font-weight-light'>{this.props.item.title}</span>
-            <Button
+           {this.props.connect && <Button
               style={{ borderRadius: "50px", marginRight: "10px" }}
               variant='outline-dark'>
               Connect
-            </Button>
+            </Button>}
           </Col>
         </Row>
       </ListGroup.Item>
