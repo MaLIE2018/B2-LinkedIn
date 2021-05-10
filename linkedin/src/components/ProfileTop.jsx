@@ -88,7 +88,7 @@ export default class ProfileTop extends Component {
 									<span>Contact info</span>
 								</a>
 							</p>{" "}
-							<span className="d-flex flex-row">
+							<span className="d-flex flex-row mb-4">
 								<Dropdown>
 									<Dropdown.Toggle
 										style={{borderRadius: "50px", marginRight: "10px"}}
