@@ -1,8 +1,14 @@
 import React, { Component } from "react";
-
+import Box from "../components/parts/Box";
 class About extends Component {
   render() {
-    return <div>Test</div>;
+    return (
+      <Box
+        edit={true}
+        title={<span className='font-weight-bold'>About</span>}
+        children={"about"}
+      />
+    );
   }
 }
 

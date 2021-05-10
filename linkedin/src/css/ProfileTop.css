@@ -1,50 +1,49 @@
-.Container{
-    height: 5vh;
-    background-color: orange;
+.Container {
+  height: 5vh;
+  background-color: orange;
 }
 
-#ProfileBackground{
-    position: relative;
-    background-image: url("https://source.unsplash.com/user/erondu/600x150");
-    height: 15vh;
-    margin-bottom: 65px;
+#ProfileBackground {
+  position: relative;
+  background-image: url("https://source.unsplash.com/user/erondu/600x150");
+  height: 15vh;
+  margin-bottom: 65px;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
-#profileImage{
-    width:100px;
-    height:100px;
-    border-radius: 50%;
-    position: absolute;
-    top: 70px;
-    left: 20px;
+#profileImage {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  border: 3px solid white;
+  position: absolute;
+  top: 105px;
+  left: 20px;
 }
-#profileImage:hover{
-    cursor: pointer;
-    opacity: 0.9;
-
-}
-
-
-
-#cameraIcon{
-    cursor: pointer;
+#profileImage:hover {
+  cursor: pointer;
+  opacity: 0.9;
 }
 
-.cameraIcon{
-    position: absolute;
-	top: 20px;
-	right: 20px;
-	background-color: white;
-	border-radius: 50%;
-	padding: 5px;
-	cursor: pointer;
-}
-.cameraIcon:hover{
-        opacity:0.8;
+#cameraIcon {
+  cursor: pointer;
 }
 
-.Pencil{
-    position: absolute;
-    top: 145px;
-    right: 8px;
+.cameraIcon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: white;
+  border-radius: 50%;
+  padding: 5px;
+  cursor: pointer;
+}
+.cameraIcon:hover {
+  opacity: 0.8;
 }
 
+.Pencil {
+  position: absolute;
+  top: 145px;
+  right: 8px;
+}

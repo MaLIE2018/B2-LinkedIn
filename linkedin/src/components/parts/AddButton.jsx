@@ -1,4 +1,4 @@
-import "../css/Buttons.css";
+import "../../css/Buttons.css";
 import { AddOutline } from "react-ionicons";
 
 import React from "react";
