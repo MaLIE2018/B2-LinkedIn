@@ -12,12 +12,12 @@ import {
 import {Camera, PencilOutline} from "react-ionicons";
 
 export default class ProfileTop extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			profile: [],
-		};
-	}
+  constructor(props) {
+    super(props);
+    this.state = {
+      profile: [],
+    };
+  }
 
 	getProfile = async () => {
 		try {
