@@ -1,8 +1,9 @@
 import { Card } from "react-bootstrap";
 import React, { Component } from "react";
 import "../css/Box.css";
-import { PencilOutline } from "react-ionicons";
-
+import EditButton from "../components/EditButton";
+import AddButton from "../components/AddButton";
+import BoxFooter from "../components/BoxFooter";
 class Box extends Component {
   state = {
     edit: true,
@@ -11,6 +12,7 @@ class Box extends Component {
   render() {
     const title = this.props.title;
     const color = this.props?.color;
+    const footerText = this.props?.footerText;
     console.log("color:", color);
     return (
       <Card
@@ -21,21 +23,13 @@ class Box extends Component {
           <Card.Title style={{ color: "#777777" }}>
             <div className='d-flex'>
               <div>{title}</div>
-              {this.props.edit && (
-                <div className='edit-button'>
-                  <PencilOutline
-                    color={"#5E5E5E"}
-                    title={"test"}
-                    height='20px'
-                    width='20px'
-                  />
-                </div>
-              )}
+              {this.props.edit && <EditButton />}
             </div>
           </Card.Title>
           {this.props?.subtitle && <span>{this.props.subtitle}</span>}
           {this.props.children}
         </Card.Body>
+        {footerText !== undefined && <BoxFooter footerText={footerText} />}
       </Card>
     );
   }
