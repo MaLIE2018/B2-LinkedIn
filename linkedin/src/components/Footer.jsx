@@ -141,6 +141,7 @@ const Footer = () => {
                 <Col className="col-md-2">
                     <label className="text-muted">Select language</label>
                     <DropdownButton
+                    drop="down"
                     variant="outline-secondary"
                     title={` Language `}
                     >
@@ -148,13 +149,10 @@ const Footer = () => {
                         <p className="dropdownText">العربية (Arabic)</p>
                     </Dropdown.Item>
                     <Dropdown.Item>
-                        <p className="dropdownText">čeština (Czech)</p>
+                        <p className="dropdownText">日本人 (Japanese)</p>
                     </Dropdown.Item>
                     <Dropdown.Item>
-                        <p className="dropdownText">Dansk (Danish)</p>
-                    </Dropdown.Item>
-                    <Dropdown.Item>
-                        <p className="dropdownText">Detusch (German)</p>
+                        <p className="dropdownText">Español (Spanish)</p>
                     </Dropdown.Item>
                     </DropdownButton>
                 </Col>

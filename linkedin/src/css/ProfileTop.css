@@ -1,7 +1,13 @@
-#backgroundImage{
+.Container{
+    height: 5vh;
+    background-color: orange;
+}
+
+#ProfileBackground{
     position: relative;
     background-image: url("https://source.unsplash.com/user/erondu/600x150");
     height: 15vh;
+    margin-bottom: 65px;
 }
 #profileImage{
     width:100px;
@@ -11,3 +17,34 @@
     top: 70px;
     left: 20px;
 }
+#profileImage:hover{
+    cursor: pointer;
+    opacity: 0.9;
+
+}
+
+
+
+#cameraIcon{
+    cursor: pointer;
+}
+
+.cameraIcon{
+    position: absolute;
+	top: 20px;
+	right: 20px;
+	background-color: white;
+	border-radius: 50%;
+	padding: 5px;
+	cursor: pointer;
+}
+.cameraIcon:hover{
+        opacity:0.8;
+}
+
+.Pencil{
+    position: absolute;
+    top: 145px;
+    right: 8px;
+}
+
