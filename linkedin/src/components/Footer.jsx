@@ -2,16 +2,17 @@
 import { DropdownButton, Dropdown, Col, Row, } from "react-bootstrap";
 import { HelpCircle } from 'react-ionicons'
 import { Flower } from 'react-ionicons'
-import Footercss from '../css/Footer.css'
-
+import '../css/Footer.css'
+import liLogo from "../assets/img/Linkedin-Logo.png"
 const Footer = () => {
     return (
-
+        <Row>
+            <Col>
         <footer id="footer">
             <img
-                src="https://via.placeholder.com/500x500"
+                src={liLogo}
                 alt="LinkedIn logo"
-                width="50rem"
+                width="100rem"
               />
             <Row>
                 <div className="col-md-2">
@@ -163,6 +164,8 @@ const Footer = () => {
                 </p>
             </div>
         </footer>
+            </Col>
+        </Row>
     )
 }
 
