@@ -112,9 +112,9 @@ const Footer = () => {
                         <li className='display-flex mb-4'>
                         <HelpCircle
                             color={'#4e4e4e'} 
-                            title={help}
-                            height="250px"
-                            width="250px"
+                            title={'help'}
+                            height="25px"
+                            width="25px"
                         />
                         <span>
                             <a class="text-muted" href="#">Questions?</a>
@@ -125,9 +125,9 @@ const Footer = () => {
                         <li className='display-flex list-style-none mb-4'>
                         <Flower
                             color={'#4e4e4e'} 
-                            title={help}
-                            height="250px"
-                            width="250px"
+                            title={'help'}
+                            height="25px"
+                            width="25px"
                         />
 
                         <a className="text-muted" href="#">Manage your account and privacy</a>
