@@ -1,14 +1,13 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import "./css/App.css";
-import ProfileTop from "./components/ProfileTop";
-
-
+import './css/App.css';
+import Profile from './pages/Profile';
+import {Container} from "react-bootstrap"
 function App() {
   return (
-		<div>
-			<ProfileTop />
-		</div>
-	);
+    <Container sm='fluid'>
+    <Profile/>
+    </Container>
+  );
 }
 
 export default App;
