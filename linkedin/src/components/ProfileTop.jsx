@@ -134,29 +134,31 @@ export default class ProfileTop extends Component {
                     More...
                   </Button>
                 </span>
-                <Row>
-                  <Carousel interval={null}>
-                    <Carousel.Item>
-                      <Row>
-                        <Col sx={8}>
-                          <Alert variant='info'>Jumbo</Alert>
-                        </Col>
-                        <Col sx={8}>
-                          <Alert variant='info'>Jumbo</Alert>
-                        </Col>
-                      </Row>
-                    </Carousel.Item>
-                    <Carousel.Item>
-                      <Row>
-                        <Col sx={6}>
-                          <Alert variant='info'>Jumbo</Alert>
-                        </Col>
-                        <Col sx={6}>
-                          <Alert variant='info'>Jumbo</Alert>
-                        </Col>
-                      </Row>
-                    </Carousel.Item>
-                  </Carousel>
+                <Row className='mt-3'>
+                  <Col>
+                    <Carousel interval={null}>
+                      <Carousel.Item>
+                        <Row>
+                          <Col sx={8}>
+                            <Alert variant='info'>Jumbo</Alert>
+                          </Col>
+                          <Col sx={8}>
+                            <Alert variant='info'>Jumbo</Alert>
+                          </Col>
+                        </Row>
+                      </Carousel.Item>
+                      <Carousel.Item>
+                        <Row>
+                          <Col sx={6}>
+                            <Alert variant='info'>Jumbo</Alert>
+                          </Col>
+                          <Col sx={6}>
+                            <Alert variant='info'>Jumbo</Alert>
+                          </Col>
+                        </Row>
+                      </Carousel.Item>
+                    </Carousel>
+                  </Col>
                 </Row>
               </Col>
             </Row>
