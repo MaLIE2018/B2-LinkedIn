@@ -1,9 +1,11 @@
 import {Component} from "react";
 import "../css/ProfileTop.css";
-import {Container, Row, Col, Dropdown, Button, Alert} from "react-bootstrap";
+import {Row, Col, Dropdown, Button, Alert} from "react-bootstrap";
 import CarouselBadge from "./Carousel";
-import CameraIcon from './CamerIcon'
-import PencilIcon from './PencilIcon'
+import CameraIcon from "./CamerIcon";
+import PencilIcon from "./PencilIcon";
+import Box from "../components/parts/Box";
+import LinkButton from "../components/parts/LinkButton";
 
 export default class ProfileTop extends Component {
 	constructor(props) {
@@ -28,7 +30,6 @@ export default class ProfileTop extends Component {
 			if (requestProfile.ok) {
 				const response = await requestProfile.json();
 				this.setState({profile: response});
-				console.log(this.state.profile);
 			}
 		} catch (error) {
 			console.log(error);
@@ -40,9 +41,10 @@ export default class ProfileTop extends Component {
 
 	render() {
 		return (
-			<>
-				<Container fluid className="m-0 p-0">
-					<Row className="m-0 mt-3 p-0">
+			<Box
+				padding={false}
+				children={
+					<Row className="m-0 p-0">
 						<Col id="ProfileBackground" sx={12}>
 							<img
 								id="profileImage"
@@ -59,18 +61,14 @@ export default class ProfileTop extends Component {
 								{this.state.profile.surname}
 							</h3>
 							<h5 style={{fontWeight: "400"}}>{this.state.profile.title}</h5>
-							<p>
+							<p className="d-flex align-items-center">
 								{this.state.profile.area}
 								{" - "}
-								<a href="">
-									<span>500 onnections</span>
-								</a>
+								{<LinkButton title={"500 connections"} />}
 								{" - "}
-								<a href="">
-									<span>Contact info</span>
-								</a>
+								{<LinkButton title={"Contact info"} />}
 							</p>{" "}
-							<span className="d-flex flex-row mb-4">
+							<span className="d-flex flex-row">
 								<Dropdown>
 									<Dropdown.Toggle
 										style={{borderRadius: "50px", marginRight: "10px"}}
@@ -91,7 +89,7 @@ export default class ProfileTop extends Component {
 									</Dropdown.Menu>
 								</Dropdown>
 
-								<Dropdown className="mr-2 pr-5">
+								<Dropdown className="mr-1">
 									<Dropdown.Toggle
 										style={{borderRadius: "50px", marginRight: "10px"}}
 										variant="outline-dark"
@@ -121,34 +119,11 @@ export default class ProfileTop extends Component {
 							</span>
 							<Row>
 								<CarouselBadge />
-
-								{/* <Carousel interval={null}>
-									<Carousel.Item>
-										<Row>
-											<Col sx={8}>
-												<Alert variant="info">Jumbo</Alert>
-											</Col>
-											<Col sx={8}>
-												<Alert variant="info">Jumbo</Alert>
-											</Col>
-										</Row>
-									</Carousel.Item>
-									<Carousel.Item>
-										<Row>
-											<Col sx={6}>
-												<Alert variant="info">Jumbo</Alert>
-											</Col>
-											<Col sx={6}>
-												<Alert variant="info">Jumbo</Alert>
-											</Col>
-										</Row>
-									</Carousel.Item>
-								</Carousel> */}
 							</Row>
 						</Col>
 					</Row>
-				</Container>
-			</>
+				}
+			/>
 		);
 	}
 }
