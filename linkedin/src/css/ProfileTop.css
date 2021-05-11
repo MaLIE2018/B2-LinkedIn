@@ -1,13 +1,110 @@
-#backgroundImage{
-    position: relative;
-    background-image: url("https://source.unsplash.com/user/erondu/600x150");
-    height: 15vh;
+.Container {
+	height: 5vh;
+	background-color: orange;
 }
-#profileImage{
-    width:100px;
-    height:100px;
-    border-radius: 50%;
-    position: absolute;
-    top: 70px;
-    left: 20px;
+
+#ProfileBackground {
+	position: relative;
+	background-image: url("https://source.unsplash.com/user/erondu/600x150");
+	height: 15vh;
+	margin-bottom: 65px;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+#profileImage {
+	width: 130px;
+	height: 130px;
+	border-radius: 50%;
+	border: 3px solid white;
+	position: absolute;
+	top: 57px;
+	left: 20px;
+}
+#profileImage:hover {
+	cursor: pointer;
+	opacity: 0.9;
+}
+
+#cameraIcon {
+	cursor: pointer;
+}
+
+.cameraIcon {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	background-color: white;
+	border-radius: 50%;
+	padding: 5px;
+	cursor: pointer;
+}
+.cameraIcon:hover {
+	opacity: 0.8;
+}
+
+.Pencil {
+	position: absolute;
+	top: 145px;
+	right: 8px;
+	font-weight: 500;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 50px;
+	height: 50px;
+	cursor: pointer;
+}
+.Pencil:hover {
+	border-radius: 50%;
+	background-color: rgba(231, 229, 229, 0.75);
+	opacity: 0.8;
+}
+
+.carousel {
+	position: relative;
+}
+
+.rec.rec-arrow-right {
+	position: absolute;
+	top: 20px;
+	right: -15px;
+	border: none;
+	border-radius: 0;
+}
+.rec.rec-arrow-left {
+	position: absolute;
+	top: 20px;
+	left: -15px;
+	border: none;
+	border-radius: 0;
+}
+
+.rec.rec-arrow {
+	width: 0px;
+	height: 0px;
+}
+
+button.sc-gtsrHT.hliWYQ.rec.rec-arrow.rec.rec-arrow-left,
+button.sc-gtsrHT.hliWYQ.rec.rec-arrow.rec.rec-arrow-right {
+	color: #000;
+	background-color: white;
+}
+
+button.sc-gtsrHT.hliWYQ.rec.rec-arrow.rec.rec-arrow-left:hover:enabled,
+button.sc-gtsrHT.hliWYQ.rec.rec-arrow.rec.rec-arrow-right:hover:enabled {
+	color: #000;
+	border-radius: 50%;
+}
+
+.rec-carousel-item {
+	margin: 5px;
+}
+
+.rec.rec-arrow:disabled {
+	visibility: hidden;
+}
+
+div.sc-fujyAs.bGFcTk.rec.rec-pagination {
+	display: none;
 }

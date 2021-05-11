@@ -1,4 +1,4 @@
-import "../css/Buttons.css";
+import "../../css/Buttons.css";
 import { PencilOutline } from "react-ionicons";
 
 import React from "react";
