@@ -93,7 +93,7 @@ class MyNavbar extends React.Component {
                   </div>
                   <span>Notifications</span>
                 </Nav.Link>
-                <div className='mt-2'>
+                <div className='d-flex flex-column justify-content-center align-items-center'>
                   <span>
                     <PersonCircle
                       color={"#00000"}
