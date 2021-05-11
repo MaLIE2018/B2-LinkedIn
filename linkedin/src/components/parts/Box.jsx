@@ -28,6 +28,7 @@ class Box extends Component {
               <div className='d-flex'>
                 <div>{title}</div>
                 {this.props.edit && <EditButton />}
+                {this.props.add && <AddButton />}
               </div>
             </Card.Title>
           )}
