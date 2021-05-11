@@ -10,3 +10,7 @@
 .list-group-item:hover .edit-button {
   visibility: visible;
 }
+
+.list-group a {
+  color: inherit;
+}

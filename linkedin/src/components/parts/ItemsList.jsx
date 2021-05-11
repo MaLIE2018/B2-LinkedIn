@@ -9,7 +9,7 @@ class ItemsList extends Component {
     return (
       <ListGroup variant='flush'>
         {items.map((item) => (
-          <ListItem item={item} connect={true} />
+          <ListItem rounded={this.props.rounded} item={item} connect={true} />
         ))}
       </ListGroup>
     );

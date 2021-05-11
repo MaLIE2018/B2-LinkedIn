@@ -13,6 +13,7 @@ class PeopleAlsoViewed extends Component {
         footerText={"Show more"}
         children={
           <ItemsList
+            rounded={true}
             items={[
               {
                 _id: "5fc4ae95b708c200175de88d",
