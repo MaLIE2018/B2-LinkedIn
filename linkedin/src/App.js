@@ -3,6 +3,7 @@ import { Container } from 'react-bootstrap';
 import MyNavbar from './components/MyNavbar';
 import Footer from './components/Footer';
 import './css/App.css';
+import Modal from './components/Modal';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <MyNavbar />
       <Container sm="fluid">
         <Profile />
+        <Modal />
         <Footer />
       </Container>
     </>
