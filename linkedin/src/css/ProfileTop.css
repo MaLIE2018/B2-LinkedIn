@@ -1,18 +1,3 @@
-<<<<<<< Updated upstream
-#backgroundImage{
-    position: relative;
-    background-image: url("https://source.unsplash.com/user/erondu/600x150");
-    height: 15vh;
-}
-#profileImage{
-    width:100px;
-    height:100px;
-    border-radius: 50%;
-    position: absolute;
-    top: 70px;
-    left: 20px;
-}
-=======
 .Container {
   height: 5vh;
   background-color: orange;
@@ -123,4 +108,3 @@ button.sc-gtsrHT.hliWYQ.rec.rec-arrow.rec.rec-arrow-right:hover:enabled {
 div.sc-fujyAs.bGFcTk.rec.rec-pagination {
   display: none;
 }
->>>>>>> Stashed changes

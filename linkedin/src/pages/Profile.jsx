@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import { Row, Col } from "react-bootstrap";
-import Box from "../components/Box";
 import About from "../components/About";
 import ProfileTop from "../components/ProfileTop";
 import Dashboard from "../components/Dashboard";
 import Activity from "../components/Activity";
+import Experience from "../components/Experience";
+import PeopleAlsoViewed from "../components/PeopleAlsoViewed";
+
 class Profile extends Component {
   constructor(props) {
     super(props);
@@ -16,7 +18,7 @@ class Profile extends Component {
   getProfile = async () => {
     try {
       const requestProfile = await fetch(
-        "https://striveschool-api.herokuapp.com/api/profile/me",
+        "https://striveschool-api.herokuapp.com/api/profile/609a5eb3dfccc50015a6bbba",
         {
           method: "GET",
           headers: {
@@ -48,12 +50,12 @@ class Profile extends Component {
               <About />
               <Dashboard />
               <Activity />
-              <Experience profileId={this.state.profile._Id} />
+              <Experience profileId={profileId} />
             </>
           )}
         </Col>
         <Col md={4}>
-          <Box />
+          <PeopleAlsoViewed />
         </Col>
       </Row>
     );
