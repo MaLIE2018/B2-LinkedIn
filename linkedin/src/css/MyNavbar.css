@@ -2,12 +2,8 @@
   height: 33px;
   width: 33px;
 }
-.nav-styles {
-  padding-left: 25%;
-  padding-right: 25%;
-}
+
 .searchBar input {
-  margin-right: 10rem;
   line-height: 2.3px;
   border: none;
   background-color: #eef3f8;
@@ -23,8 +19,17 @@
   height: 55px;
   margin-left: 20px;
 }
-.premium {
+.premium span {
   font-size: smaller;
+  color: #f9bc08;
+}
+
+header {
+  background-color: white;
+}
+
+#basic-nav-dropdown {
+  padding: 0;
 }
 /* div.dropdown a {
 	padding: 0;
