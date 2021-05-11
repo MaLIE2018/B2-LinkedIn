@@ -19,8 +19,9 @@
   height: 55px;
   margin-left: 20px;
 }
-.premium {
+.premium span {
   font-size: smaller;
+  color: #f9bc08;
 }
 
 header {

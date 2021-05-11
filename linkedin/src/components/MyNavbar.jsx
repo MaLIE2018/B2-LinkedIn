@@ -146,7 +146,9 @@ class MyNavbar extends React.Component {
                   </NavDropdown>
                 </div>
                 <Nav.Link className='premium'>
-                  <span className='text-center'>Retry Premium Free</span>
+                  <span className='d-flex justify-content-center text-center'>
+                    Retry Premium <br></br> Free
+                  </span>
                 </Nav.Link>
               </Nav>
             </Navbar.Collapse>
