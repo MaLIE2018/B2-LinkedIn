@@ -1,10 +1,18 @@
 import React, { Component } from "react";
 import { ListGroup, Col, Row, Button } from "react-bootstrap";
 import EditButton from "./EditButton";
-import { format, formatDistance, formatRelative, subDays } from "date-fns";
+import { format, parseISO } from "date-fns";
 class ListItem extends Component {
   render() {
     const edit = this.props?.edit;
+    let sdate = this.props?.item.startDate;
+    let edate = this.props?.item.endDate;
+    if (sdate) {
+      sdate = format(new Date(sdate), "MMM yyyy");
+    }
+    if (edate) {
+      edate = format(new Date(edate), "MMM yyyy");
+    }
     return (
       <ListGroup.Item>
         <Row className='d-flex flex-nowrap'>
@@ -20,7 +28,7 @@ class ListItem extends Component {
           <Col md={10} className='ml-2'>
             {/* If this prop exist its a person */}
             {this.props.item.name && (
-              <a href=''>
+              <a href='/'>
                 <div className='font-weight-bold d-flex flex-row'>
                   {this.props.item.name} {" · "}
                   <span className='text-muted font-weight-light'>2nd</span>
@@ -33,21 +41,22 @@ class ListItem extends Component {
             {/* If this props exist its a experience */}
             {this.props.item.company && (
               <>
-                <a href=''>
+                <a href='/'>
                   <div className='font-weight-bolder d-flex flex-row'>
                     {this.props.item.role}
                     {edit && (
-                      <EditButton onClick={this.props.onEditButtonClick} />
+                      <EditButton
+                        onClick={(e) =>
+                          this.props.onEditButtonClick(e, this.props.item)
+                        }
+                      />
                     )}
                   </div>
                   <div className='font-weight-bold'>
                     {this.props.item.company}
                   </div>
                   <div className='text-muted font-weight-light'>
-                    {format(new Date(this.props.item.startDate), "MMM yyyy")} -
-                    {this.props.item.endDate !== "null"
-                      ? format(new Date(this.props.item.endDate), "MMM yyyy")
-                      : "present"}
+                    {sdate} -{edate !== undefined ? { edate } : "present"}
                   </div>
                   <span className='font-weight-light'>
                     {this.props.item.area}
@@ -59,7 +68,8 @@ class ListItem extends Component {
             {this.props.connect && (
               <Button
                 style={{ borderRadius: "50px", marginRight: "10px" }}
-                variant='outline-dark'>
+                variant='outline-dark'
+                className='d-block'>
                 Connect
               </Button>
             )}

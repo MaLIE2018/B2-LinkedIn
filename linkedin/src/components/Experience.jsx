@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import Box from "../components/parts/Box";
 import ItemsList from "../components/parts/ItemsList";
+import ModalExperience from "./ModelExperience";
 class Experience extends Component {
   state = {
     experiences: [],
+    currentExperience: {},
+    showModal: false,
   };
 
   postExp = async () => {
@@ -20,7 +23,7 @@ class Experience extends Component {
       // );
       // if (requestProfile.ok) {
       //   const response = await requestProfile.json();
-      const identity = "this.props.profileId";
+      const identity = this.props.profileId;
       const newUrl =
         "https://striveschool-api.herokuapp.com/api/profile/" +
         identity +
@@ -47,9 +50,11 @@ class Experience extends Component {
   componentDidMount() {
     this.postExp();
   }
-  handleClick = (e) => {
+  handleClick = (e, item) => {
     e.preventDefault();
-    console.log("hallo");
+    this.setState((state) => {
+      return { currentExperience: item, showModal: true };
+    });
   };
   render() {
     return this.state.experiences.length !== 0 ? (
@@ -57,12 +62,18 @@ class Experience extends Component {
         add={true}
         title='Experience'
         children={
-          <ItemsList
-            rounded={true}
-            edit={true}
-            onEditButtonClick={this.handleClick}
-            items={this.state.experiences}
-          />
+          <>
+            <ItemsList
+              rounded={true}
+              edit={true}
+              onEditButtonClick={this.handleClick}
+              items={this.state.experiences}
+            />
+            <ModalExperience
+              showModal={this.state.showModal}
+              item={this.state.currentExperience}
+            />
+          </>
         }
       />
     ) : null;

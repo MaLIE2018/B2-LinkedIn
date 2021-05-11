@@ -16,7 +16,8 @@ class ItemsList extends Component {
             <ListItem
               rounded={this.props.rounded}
               item={item}
-              edit={item}
+              edit={true}
+              key={item._id}
               onEditButtonClick={this.props.onEditButtonClick}
               connect={this.props.connect}
             />
