@@ -6,6 +6,8 @@ import CameraIcon from "./CamerIcon";
 import PencilIcon from "./PencilIcon";
 import Box from "../components/parts/Box";
 import LinkButton from "../components/parts/LinkButton";
+import DropdownButton from "./DropdownButton";
+import ModalExperience from './Model'
 
 export default class ProfileTop extends Component {
 	constructor(props) {
@@ -69,7 +71,8 @@ export default class ProfileTop extends Component {
 								{<LinkButton title={"Contact info"} />}
 							</p>{" "}
 							<span className="d-flex flex-row">
-								<Dropdown>
+								<DropdownButton />
+								{/* <Dropdown>
 									<Dropdown.Toggle
 										style={{borderRadius: "50px", marginRight: "10px"}}
 										variant="primary"
@@ -87,7 +90,8 @@ export default class ProfileTop extends Component {
 											Something else
 										</Dropdown.Item>
 									</Dropdown.Menu>
-								</Dropdown>
+								</Dropdown> */}
+								<ModalExperience />
 
 								<Dropdown className="mr-1">
 									<Dropdown.Toggle
