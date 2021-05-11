@@ -1,23 +1,17 @@
 import {Component} from "react";
 import "../css/ProfileTop.css";
-import {
-	Container,
-	Row,
-	Col,
-	Dropdown,
-	Button,
-	Alert,
-	Carousel,
-} from "react-bootstrap";
-import {Camera, PencilOutline} from "react-ionicons";
+import {Container, Row, Col, Dropdown, Button, Alert} from "react-bootstrap";
+import CarouselBadge from "./Carousel";
+import CameraIcon from './CamerIcon'
+import PencilIcon from './PencilIcon'
 
 export default class ProfileTop extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      profile: [],
-    };
-  }
+	constructor(props) {
+		super(props);
+		this.state = {
+			profile: [],
+		};
+	}
 
 	getProfile = async () => {
 		try {
@@ -47,28 +41,16 @@ export default class ProfileTop extends Component {
 	render() {
 		return (
 			<>
-				<Container>
+				<Container fluid className="m-0 p-0">
 					<Row className="m-0 mt-3 p-0">
 						<Col id="ProfileBackground" sx={12}>
-							<Camera
-								className="cameraIcon"
-								color={"#0a66c2"}
-								title={"camra"}
-								height="30px"
-								width="30px"
-							/>
 							<img
 								id="profileImage"
 								src={this.state.profile.image}
 								alt="profile_image"
 							/>
-							<PencilOutline
-								className="Pencil"
-								color={"#656161"}
-								title={"pencil"}
-								height="40px"
-								width="100px"
-							/>
+							<CameraIcon classname={"cameraIcon"} />
+							<PencilIcon classname={"Pencil"} />
 						</Col>
 						<Col id="ProfileInfo" xs={12}>
 							<h3>
@@ -138,7 +120,9 @@ export default class ProfileTop extends Component {
 								</Button>
 							</span>
 							<Row>
-								<Carousel interval={null}>
+								<CarouselBadge />
+
+								{/* <Carousel interval={null}>
 									<Carousel.Item>
 										<Row>
 											<Col sx={8}>
@@ -159,7 +143,7 @@ export default class ProfileTop extends Component {
 											</Col>
 										</Row>
 									</Carousel.Item>
-								</Carousel>
+								</Carousel> */}
 							</Row>
 						</Col>
 					</Row>
