@@ -3,9 +3,9 @@ import { PencilOutline } from "react-ionicons";
 
 import React from "react";
 
-const EditButton = () => {
+const EditButton = (props) => {
   return (
-    <div className='edit-button'>
+    <div className='edit-button btn' onClick={props.onClick}>
       <PencilOutline
         color={"#5E5E5E"}
         title={"test"}
