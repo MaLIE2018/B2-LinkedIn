@@ -108,7 +108,7 @@ export default class ProfileTop extends Component {
                     </Dropdown.Menu>
                   </Dropdown>
 
-                  <Dropdown className='mr-2 pr-5'>
+                  <Dropdown className='mr-1'>
                     <Dropdown.Toggle
                       style={{ borderRadius: "50px", marginRight: "10px" }}
                       variant='outline-dark'
