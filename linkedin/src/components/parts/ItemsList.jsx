@@ -14,9 +14,10 @@ class ItemsList extends Component {
         {items.map((item, i) => (
           <>
             <ListItem
+              key={item._id}
               rounded={this.props.rounded}
               item={item}
-              edit={item}
+              edit={true}
               onEditButtonClick={this.props.onEditButtonClick}
               connect={this.props.connect}
             />

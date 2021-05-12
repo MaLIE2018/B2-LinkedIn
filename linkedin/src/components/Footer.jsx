@@ -33,7 +33,7 @@ const Footer = () => {
                     Sales Solutions
                   </a>
                 </li>
-                <li class='py-1'>
+                <li className='py-1'>
                   <a className='text-muted' href='#'>
                     Safety Center
                   </a>
