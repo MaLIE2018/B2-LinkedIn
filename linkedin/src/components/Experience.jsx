@@ -27,6 +27,7 @@ class Experience extends Component {
 			if (requestProfile.ok) {
 				const response = await requestProfile.json();
 				const identity = response._id;
+				// console.log(identity);
 
 				const newUrl =
 					'https://striveschool-api.herokuapp.com/api/profile/' +
