@@ -41,7 +41,6 @@ function ModalExperience(props) {
     } else {
       endDate = null;
     }
-    console.log(startDate);
     if (startDate || endDate) {
       setData((data) => {
         return {
@@ -155,8 +154,8 @@ function ModalExperience(props) {
 
       if (response.ok) {
         console.log("Experience Updated");
-        setLgShow(false);
         // props.onUpdate(e, true);
+        setLgShow(false);
       } else {
         console.log("Something went wrong!");
       }
@@ -460,7 +459,7 @@ function ModalExperience(props) {
                       <div className='d-flex'>
                         <div className='d-flex m-2'>
                           <Form.Control
-                            id='sMonth'
+                            id='eMonth'
                             as='select'
                             value={data.dates.eMonth}
                             onChange={(e) => handleChangeDates(e)}>
@@ -481,7 +480,7 @@ function ModalExperience(props) {
                         </div>
                         <div className='d-flex m-2'>
                           <Form.Control
-                            id='sYear'
+                            id='eYear'
                             as='select'
                             value={data.dates.eYear}
                             onChange={(e) => handleChangeDates(e)}>
