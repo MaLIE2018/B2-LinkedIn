@@ -3,37 +3,57 @@ import { useState, useEffect } from "react";
 import "../css/ProfileTop.css";
 
 function ModalExperience(props) {
+  let url = `https://striveschool-api.herokuapp.com/api/profile/${props.item.user}/experiences/`;
+
   const [lgShow, setLgShow] = useState(false);
-  const [experience, setExperience] = useState({
-    role: "",
-    company: "",
-    startDate: "",
-    endDate: "",
-    description: "",
-    area: "",
-  });
-  const [dates, setDate] = useState({
-    sMonth: "",
-    sYear: null,
-    eMonth: "",
-    eYear: null,
+  const [data, setData] = useState({
+    experience: {
+      role: "",
+      company: "",
+      startDate: "",
+      endDate: "",
+      description: "",
+      area: "",
+    },
+    dates: {
+      sMonth: "",
+      sYear: null,
+      eMonth: "",
+      eYear: null,
+    },
   });
 
   useEffect(() => {
-    let startDate =
-      dates.sYear && dates.sMonth ? new Date(dates.sYear, dates.sMonth, 1) : "";
-    let endDate =
-      dates.eYear && dates.eMonth ? new Date(dates.eYear, dates.eMonth, 1) : "";
+    let sYear = data.dates.sYear;
+    let sMonth = data.dates.sMonth;
+    let eYear = data.dates.eYear;
+    let eMonth = data.dates.eMonth;
+    let startDate = sYear ? new Date(sYear, sMonth, 1) : "";
+    let endDate = eYear ? new Date(eYear, eMonth, 1) : "";
     if (startDate) startDate = startDate.toISOString();
-    if (endDate) endDate = endDate.toISOString();
-    setExperience(() => {
-      return {
-        ...experience,
-        startDate: startDate,
-        endDate: endDate,
-      };
-    });
-  }, [dates]);
+    if (endDate) {
+      endDate = endDate.toISOString();
+    } else {
+      endDate = null;
+    }
+    console.log(startDate);
+    if (startDate || endDate) {
+      setData((data) => {
+        return {
+          ...data,
+          experience: {
+            ...data.experience,
+            startDate: startDate,
+            endDate: endDate,
+          },
+        };
+      });
+      sYear = null;
+      sMonth = null;
+      eYear = null;
+      eMonth = null;
+    }
+  }, [data.dates]);
 
   useEffect(() => {
     if (props.showModal) {
@@ -43,26 +63,100 @@ function ModalExperience(props) {
   }, [props]);
 
   const fillData = () => {
-    Object.keys(experience).forEach((key) => {
+    let startDate = "";
+    let endDate = "";
+    let sYear = null;
+    let sMonth = null;
+    let eYear = null;
+    let eMonth = null;
+    Object.keys(data.experience).forEach((key) => {
       if (key === "startDate") {
-        let startDate = new Date(props.item[key]);
+        startDate = props.item[key];
+        let date = new Date(startDate);
+        sMonth = date.getMonth();
+        sYear = date.getFullYear();
       }
       if (key === "endDate") {
-        let endDate = new Date(props.item[key]);
+        endDate = props.item[key];
+        let date = new Date(endDate);
+        eMonth = date.getMonth();
+        eYear = date.getFullYear();
       }
-      setExperience((experience) => {
-        return { ...experience, [key]: props.item[key] };
+      setData((data) => {
+        return {
+          ...data,
+          experience: { ...data.experience, [key]: props.item[key] },
+          dates: { sMonth: sMonth, eMonth: eMonth, sYear: sYear, eYear: eYear },
+        };
       });
     });
   };
 
   const handleChange = (e) => {
-    setExperience(() => {
-      return { ...experience, [e.target.id]: e.target.value };
+    setData((data) => {
+      return {
+        ...data,
+        experience: {
+          ...data.experience,
+          [e.target.id]: e.target.value,
+        },
+        dates: { ...data.dates, [e.target.id]: e.target.value },
+      };
     });
-    setDate(() => {
-      return { ...dates, [e.target.id]: e.target.value };
+  };
+
+  const handleChangeDates = (e) => {
+    setData((data) => {
+      return {
+        ...data,
+        dates: { ...data.dates, [e.target.id]: e.target.value },
+      };
     });
+  };
+
+  const handleDelete = async (e) => {
+    e.preventDefault();
+    try {
+      let response = await fetch(url + props.item._id, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDlhNWViM2RmY2NjNTAwMTVhNmJiYmEiLCJpYXQiOjE2MjA3Mjk1MjQsImV4cCI6MTYyMTkzOTEyNH0.boEO9mTiItNdEDrhQcw1KIvBKIGJ0dCkRW7d3cNzv0M`,
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.ok) {
+        console.log("Experience Deleted");
+        setLgShow(false);
+        //props.onUpdate(e);
+      } else {
+        console.log("Something went wrong!");
+      }
+    } catch (error) {
+      console.log(`Something went wrong! ${error}`);
+    }
+  };
+
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    try {
+      let response = await fetch(url + props.item._id, {
+        method: "PUT",
+        headers: new Headers({
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDlhNWViM2RmY2NjNTAwMTVhNmJiYmEiLCJpYXQiOjE2MjA3Mjk1MjQsImV4cCI6MTYyMTkzOTEyNH0.boEO9mTiItNdEDrhQcw1KIvBKIGJ0dCkRW7d3cNzv0M`,
+          "Content-Type": "application/json",
+        }),
+        body: JSON.stringify(data.experience),
+      });
+
+      if (response.ok) {
+        console.log("Experience Updated");
+        setLgShow(false);
+      } else {
+        console.log("Something went wrong!");
+      }
+    } catch (error) {
+      console.log(`Something went wrong! ${error}`);
+    }
   };
 
   return (
@@ -85,14 +179,14 @@ function ModalExperience(props) {
               <Form.Control
                 type='text'
                 placeholder='Enter your title'
-                value={experience.role}
+                value={data.experience.role}
                 onChange={(e) => handleChange(e)}
               />
             </Form.Group>
 
             <Form.Group controlId='employmentType' className='mb-3'>
               <Form.Label>Employment Type</Form.Label>
-              <Form.Control id='employmentType' as='select'>
+              <Form.Control as='select'>
                 <option value=''>-</option>
                 <option>Full-time</option>
                 <option>Part-time</option>
@@ -109,7 +203,7 @@ function ModalExperience(props) {
                 <br />
               </Form.Text>
               <Form.Text>
-                <a href='#'>Learn more</a>
+                <a href='/'>Learn more</a>
               </Form.Text>
             </Form.Group>
             <Form.Group controlId='company' className='mb-3' required>
@@ -117,7 +211,7 @@ function ModalExperience(props) {
               <Form.Control
                 type='text'
                 placeholder='Enter company name you worked for'
-                value={experience.company}
+                value={data.experience.company}
                 onChange={(e) => handleChange(e)}
               />
             </Form.Group>
@@ -126,7 +220,7 @@ function ModalExperience(props) {
               <Form.Control
                 type='text'
                 placeholder='City, State, Country'
-                value={experience.area}
+                value={data.experience.area}
                 onChange={(e) => handleChange(e)}
               />
             </Form.Group>
@@ -148,7 +242,8 @@ function ModalExperience(props) {
                     <Form.Control
                       id='sMonth'
                       as='select'
-                      onChange={(e) => handleChange(e)}>
+                      value={data.dates.sMonth}
+                      onChange={(e) => handleChangeDates(e)}>
                       <option value=''>Month</option>
                       <option value='0'>January</option>
                       <option value='1'>February</option>
@@ -168,7 +263,8 @@ function ModalExperience(props) {
                     <Form.Control
                       id='sYear'
                       as='select'
-                      onChange={(e) => handleChange(e)}>
+                      value={data.dates.sYear}
+                      onChange={(e) => handleChangeDates(e)}>
                       <option value=''>Year</option>
                       <option value='2021'>2021</option>
                       <option value='2020'>2020</option>
@@ -244,7 +340,12 @@ function ModalExperience(props) {
             </Form.Group>
             <Form.Group controlId='description'>
               <Form.Label>Description</Form.Label>
-              <Form.Control as='textarea' rows={3} />
+              <Form.Control
+                as='textarea'
+                rows={3}
+                value={data.experience.description}
+                onChange={(e) => handleChange(e)}
+              />
             </Form.Group>
 
             <div>
@@ -277,7 +378,7 @@ function ModalExperience(props) {
                       fontSize: "15px",
                       marginRight: "10px",
                     }}
-                    class='badge badge-primary rounded-pill'>
+                    className='badge badge-primary rounded-pill'>
                     ?
                   </span>
                   Supported formats
@@ -289,9 +390,9 @@ function ModalExperience(props) {
                 <div className='d-flex justify-content-center align-items-center'>
                   <span>Off</span>
                   <div className=' p-2'>
-                    <label class='switch' label='Off'>
+                    <label className='switch' label='Off'>
                       <input type='checkbox' />
-                      <span class='slider round'></span>
+                      <span className='slider round'></span>
                     </label>
                   </div>
                 </div>
@@ -300,7 +401,7 @@ function ModalExperience(props) {
                   <p>
                     If enabled, your network may be informed of job chnages,
                     education chnages and work anniversaries.{" "}
-                    <a href='#'>Learn how these are shared and when</a>
+                    <a href='/'>Learn how these are shared and when</a>
                   </p>
                 </div>
               </div>
@@ -310,13 +411,15 @@ function ModalExperience(props) {
               <Button
                 className='rounded-pill border border-dark m-2'
                 variant='light '
-                type='submit'>
+                type='submit'
+                onClick={(e) => handleDelete(e)}>
                 Delete
               </Button>
               <Button
                 className='rounded-pill m-2'
                 variant='primary'
-                type='submit'>
+                type='submit'
+                onClick={(e) => handleUpdate(e)}>
                 Save
               </Button>
             </div>

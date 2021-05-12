@@ -7,6 +7,7 @@ class Experience extends Component {
     experiences: [],
     currentExperience: {},
     showModal: false,
+    updated: false,
   };
 
   postExp = async () => {
@@ -39,7 +40,7 @@ class Experience extends Component {
       if (response.ok) {
         const data = await response.json();
         this.setState((state) => {
-          return { experiences: data };
+          return { experiences: data, updated: false };
         });
       }
     } catch (error) {
@@ -54,6 +55,13 @@ class Experience extends Component {
     e.preventDefault();
     this.setState((state) => {
       return { currentExperience: item, showModal: true };
+    });
+  };
+
+  handleUpdate = (e) => {
+    e.preventDefault();
+    this.setState((state) => {
+      return { updated: true };
     });
   };
   render() {
@@ -71,6 +79,7 @@ class Experience extends Component {
             />
             <ModalExperience
               showModal={this.state.showModal}
+              onUpdate={this.handleUpdate}
               item={this.state.currentExperience}
             />
           </>

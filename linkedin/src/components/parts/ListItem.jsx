@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { ListGroup, Col, Row, Button } from "react-bootstrap";
 import EditButton from "./EditButton";
-import { format, parseISO } from "date-fns";
+import { format } from "date-fns";
 class ListItem extends Component {
   render() {
     const edit = this.props?.edit;
     let sdate = this.props?.item.startDate;
     let edate = this.props?.item.endDate;
+
     if (sdate) {
       sdate = format(new Date(sdate), "MMM yyyy");
     }
@@ -20,7 +21,6 @@ class ListItem extends Component {
             <img
               src={this.props.item.image}
               alt=''
-              srcset=''
               className={this.props.rounded && "rounded-circle"}
               style={{ height: "50px" }}
             />
@@ -56,7 +56,7 @@ class ListItem extends Component {
                     {this.props.item.company}
                   </div>
                   <div className='text-muted font-weight-light'>
-                    {sdate} -{edate !== undefined ? { edate } : "present"}
+                    {sdate} -{edate ? { edate } : "present"}
                   </div>
                   <span className='font-weight-light'>
                     {this.props.item.area}

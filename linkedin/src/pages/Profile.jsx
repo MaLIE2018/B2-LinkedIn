@@ -23,7 +23,7 @@ class Profile extends Component {
           method: "GET",
           headers: {
             Authorization:
-              " Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDk4ZmE0MTYxOWU1ZDAwMTUxZjhmN2YiLCJpYXQiOjE2MjA2MzgyNzMsImV4cCI6MTYyMTg0Nzg3M30.D-RniP4L8eJ8XOdOjRXswq8LsRnPVK-QYiUr8h9fPhk",
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDk4ZmE0MTYxOWU1ZDAwMTUxZjhmN2YiLCJpYXQiOjE2MjA2MzgyNzMsImV4cCI6MTYyMTg0Nzg3M30.D-RniP4L8eJ8XOdOjRXswq8LsRnPVK-QYiUr8h9fPhk",
           },
         }
       );
@@ -54,9 +54,7 @@ class Profile extends Component {
             </>
           )}
         </Col>
-        <Col md={4}>
-          <PeopleAlsoViewed />
-        </Col>
+        <Col md={4}>{/* <PeopleAlsoViewed /> */}</Col>
       </Row>
     );
   }
