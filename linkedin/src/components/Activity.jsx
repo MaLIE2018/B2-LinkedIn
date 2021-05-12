@@ -8,7 +8,7 @@ const Activity = () => {
       subtitle={<LinkButton title={"296 followers"} />}
       title={"Activity"}
       footerText={"See all Activity"}
-      children={<div>"Test"</div>}
+      render={(state) => <div>"Test"</div>}
     />
   );
 };

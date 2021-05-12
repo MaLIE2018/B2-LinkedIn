@@ -10,20 +10,14 @@ class Experience extends Component {
     updated: false,
   };
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.updated !== this.state.updated) {
+      this.postExp();
+    }
+  }
+
   postExp = async () => {
     try {
-      // const requestProfile = await fetch(
-      //   "https://striveschool-api.herokuapp.com/api/profile/me",
-      //   {
-      //     method: "GET",
-      //     headers: {
-      //       Authorization:
-      //         "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDlhNWViM2RmY2NjNTAwMTVhNmJiYmEiLCJpYXQiOjE2MjA3Mjk1MjQsImV4cCI6MTYyMTkzOTEyNH0.boEO9mTiItNdEDrhQcw1KIvBKIGJ0dCkRW7d3cNzv0M",
-      //     },
-      //   }
-      // );
-      // if (requestProfile.ok) {
-      //   const response = await requestProfile.json();
       const identity = this.props.profileId;
       const newUrl =
         "https://striveschool-api.herokuapp.com/api/profile/" +
@@ -57,11 +51,11 @@ class Experience extends Component {
     });
   };
 
-  handleUpdate = (e) => {
+  handleUpdate = (e, bool) => {
     console.log("Updating...");
     e.preventDefault();
     this.setState((state) => {
-      return { updated: true };
+      return { updated: bool };
     });
   };
   render() {
@@ -69,7 +63,7 @@ class Experience extends Component {
       <Box
         add={true}
         title='Experience'
-        children={
+        render={(state) => (
           <>
             <ItemsList
               rounded={true}
@@ -84,7 +78,7 @@ class Experience extends Component {
               item={this.state.currentExperience}
             />
           </>
-        }
+        )}
       />
     ) : null;
   }

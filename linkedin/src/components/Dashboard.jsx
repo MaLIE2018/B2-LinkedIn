@@ -12,7 +12,7 @@ class Dashboard extends Component {
         }
         color={"#DCE6F1"}
         title={"Dashboard"}
-        children={<div>"Test"</div>}
+        render={(state) => <div>"Test"</div>}
       />
     );
   }

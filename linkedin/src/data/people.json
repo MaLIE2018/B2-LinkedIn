@@ -166,19 +166,5 @@
     "createdAt": "2020-11-30T09:27:08.618Z",
     "updatedAt": "2020-12-05T10:42:55.007Z",
     "__v": 0
-  },
-  {
-    "_id": "5fc4bb8db708c200175de89c",
-    "name": "Lidia ",
-    "surname": "Kovac ",
-    "email": "lidia.kovac1998@gmail.com",
-    "username": "Lidia ",
-    "title": "Junior Web Developer",
-    "bio": "I love developing and sports. ",
-    "area": "Genova, Italy",
-    "image": "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png",
-    "createdAt": "2020-11-30T09:29:49.534Z",
-    "updatedAt": "2020-11-30T09:29:49.534Z",
-    "__v": 0
   }
 ]

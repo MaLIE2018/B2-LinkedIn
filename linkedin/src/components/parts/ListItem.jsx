@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { ListGroup, Col, Row, Button } from "react-bootstrap";
 import EditButton from "./EditButton";
 import { format } from "date-fns";
+import { AddOutline } from "react-ionicons";
 class ListItem extends Component {
   render() {
     const edit = this.props?.edit;
@@ -55,7 +56,6 @@ class ListItem extends Component {
                     {this.props.item.company}
                   </div>
                   <div className='text-muted font-weight-light'>
-                    {console.log(edate)}
                     {sdate} -{edate ? edate : "present"}
                   </div>
                   <span className='font-weight-light'>
@@ -71,6 +71,20 @@ class ListItem extends Component {
                 variant='outline-dark'
                 className='d-block'>
                 Connect
+              </Button>
+            )}
+            {this.props.follow && (
+              <Button
+                style={{ borderRadius: "50px", marginRight: "10px" }}
+                variant='outline-dark'
+                className='d-block d-flex justify-content-center align-items-center'>
+                <AddOutline
+                  color={"#808080"}
+                  title={"cross"}
+                  height='25px'
+                  width='25px'
+                />
+                Follow
               </Button>
             )}
           </Col>
