@@ -52,7 +52,7 @@ class Modal extends Component {
         console.log('Something went wrong!');
       }
     } catch (error) {
-      console.log(`Something went wrong! ${error}`);
+      console.log(`Something went wrong ${error}`);
     }
   };
 
