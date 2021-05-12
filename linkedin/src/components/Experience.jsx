@@ -32,8 +32,7 @@ class Experience extends Component {
       const response = await fetch(newUrl, {
         method: "GET",
         headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDlhNWViM2RmY2NjNTAwMTVhNmJiYmEiLCJpYXQiOjE2MjA3Mjk1MjQsImV4cCI6MTYyMTkzOTEyNH0.boEO9mTiItNdEDrhQcw1KIvBKIGJ0dCkRW7d3cNzv0M",
+          Authorization: "Bearer " + this.props.bearerToken,
           "Content-Type": "application/json",
         },
       });
@@ -59,6 +58,7 @@ class Experience extends Component {
   };
 
   handleUpdate = (e) => {
+    console.log("Updating...");
     e.preventDefault();
     this.setState((state) => {
       return { updated: true };
@@ -78,6 +78,7 @@ class Experience extends Component {
               items={this.state.experiences}
             />
             <ModalExperience
+              bearerToken={this.props.bearerToken}
               showModal={this.state.showModal}
               onUpdate={this.handleUpdate}
               item={this.state.currentExperience}

@@ -120,14 +120,14 @@ function ModalExperience(props) {
       let response = await fetch(url + props.item._id, {
         method: "DELETE",
         headers: {
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDlhNWViM2RmY2NjNTAwMTVhNmJiYmEiLCJpYXQiOjE2MjA3Mjk1MjQsImV4cCI6MTYyMTkzOTEyNH0.boEO9mTiItNdEDrhQcw1KIvBKIGJ0dCkRW7d3cNzv0M`,
+          Authorization: "Bearer " + props.bearerToken,
           "Content-Type": "application/json",
         },
       });
       if (response.ok) {
         console.log("Experience Deleted");
+        // props.onUpdate(e, true);
         setLgShow(false);
-        //props.onUpdate(e);
       } else {
         console.log("Something went wrong!");
       }
@@ -142,7 +142,7 @@ function ModalExperience(props) {
       let response = await fetch(url + props.item._id, {
         method: "PUT",
         headers: new Headers({
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDlhNWViM2RmY2NjNTAwMTVhNmJiYmEiLCJpYXQiOjE2MjA3Mjk1MjQsImV4cCI6MTYyMTkzOTEyNH0.boEO9mTiItNdEDrhQcw1KIvBKIGJ0dCkRW7d3cNzv0M`,
+          Authorization: "Bearer " + props.bearerToken,
           "Content-Type": "application/json",
         }),
         body: JSON.stringify(data.experience),
@@ -151,6 +151,7 @@ function ModalExperience(props) {
       if (response.ok) {
         console.log("Experience Updated");
         setLgShow(false);
+        // props.onUpdate(e, true);
       } else {
         console.log("Something went wrong!");
       }

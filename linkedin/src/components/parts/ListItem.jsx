@@ -7,7 +7,6 @@ class ListItem extends Component {
     const edit = this.props?.edit;
     let sdate = this.props?.item.startDate;
     let edate = this.props?.item.endDate;
-
     if (sdate) {
       sdate = format(new Date(sdate), "MMM yyyy");
     }
@@ -56,7 +55,8 @@ class ListItem extends Component {
                     {this.props.item.company}
                   </div>
                   <div className='text-muted font-weight-light'>
-                    {sdate} -{edate ? { edate } : "present"}
+                    {console.log(edate)}
+                    {sdate} -{edate ? edate : "present"}
                   </div>
                   <span className='font-weight-light'>
                     {this.props.item.area}

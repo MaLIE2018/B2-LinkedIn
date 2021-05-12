@@ -11,7 +11,6 @@ function App() {
       <MyNavbar />
       <Container sm="fluid">
         <Profile />
-        <Modal />
         <Footer />
       </Container>
     </>
