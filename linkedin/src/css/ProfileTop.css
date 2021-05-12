@@ -268,3 +268,27 @@ input:checked + .slider:before {
 .slider.round:before {
 	border-radius: 50%;
 }
+
+input[type="checkbox"] {
+	-webkit-appearance: none;
+	width: 25px;
+	height: 25px;
+	background: white;
+	position: relative;
+	border: 1px solid #14141499;
+	border-radius: 20%;
+	margin-right: 10px;
+}
+
+input[type="checkbox"]:checked:after {
+	background: #057642;
+	content: "🗸";
+	position: absolute;
+	font-size: 20px;
+	font-weight: bolder;
+	color: white;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 0px;
+}

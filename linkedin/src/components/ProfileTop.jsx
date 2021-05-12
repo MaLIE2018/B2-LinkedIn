@@ -71,48 +71,19 @@ export default class ProfileTop extends Component {
 								{<LinkButton title={"Contact info"} />}
 							</p>{" "}
 							<span className="d-flex flex-row">
-								<DropdownButton />
-								{/* <Dropdown>
-									<Dropdown.Toggle
-										style={{borderRadius: "50px", marginRight: "10px"}}
-										variant="primary"
-										id="dropdown-basic"
-									>
-										Open to
-									</Dropdown.Toggle>
+								<DropdownButton
+									Name="Open to"
+									Background="primary"
+									Border="primary"
+								/>
+								<DropdownButton
+									Name="Add profile section"
+									Background="outline-dark"
+									Border="dark"
+								/>
+								{/* <DropdownButton Name="More..." Background="outline-dark" /> */}
 
-									<Dropdown.Menu>
-										<Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-										<Dropdown.Item href="#/action-2">
-											Another action
-										</Dropdown.Item>
-										<Dropdown.Item href="#/action-3">
-											Something else
-										</Dropdown.Item>
-									</Dropdown.Menu>
-								</Dropdown> */}
 								<ModalExperience />
-
-								<Dropdown className="mr-1">
-									<Dropdown.Toggle
-										style={{borderRadius: "50px", marginRight: "10px"}}
-										variant="outline-dark"
-										border="dark"
-										id="dropdown-basic"
-									>
-										Add profile section
-									</Dropdown.Toggle>
-
-									<Dropdown.Menu>
-										<Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-										<Dropdown.Item href="#/action-2">
-											Another action
-										</Dropdown.Item>
-										<Dropdown.Item href="#/action-3">
-											Something else
-										</Dropdown.Item>
-									</Dropdown.Menu>
-								</Dropdown>
 
 								<Button
 									style={{borderRadius: "50px", marginRight: "10px"}}
