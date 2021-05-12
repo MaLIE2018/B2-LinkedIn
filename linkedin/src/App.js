@@ -3,19 +3,19 @@ import { Container } from 'react-bootstrap';
 import MyNavbar from './components/MyNavbar';
 import Footer from './components/Footer';
 import './css/App.css';
-import Modal from './components/Modal';
+import MyNewsFeed from './components/MyNewsFeed';
 
 function App() {
-  return (
-    <>
-      <MyNavbar />
-      <Container sm="fluid">
-        <Profile />
-        <Modal />
-        <Footer />
-      </Container>
-    </>
-  );
+	return (
+		<>
+			<MyNavbar />
+			<Container sm="fluid">
+				<Profile />
+				<MyNewsFeed />
+				<Footer />
+			</Container>
+		</>
+	);
 }
 
 export default App;
