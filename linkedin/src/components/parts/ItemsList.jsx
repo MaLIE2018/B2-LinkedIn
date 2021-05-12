@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { ListGroup } from "react-bootstrap";
 import ListItem from "./ListItem";
-import "../../css/ItemList.css";
+import "../../css/ItemsList.css";
 
 class ItemsList extends Component {
   render() {

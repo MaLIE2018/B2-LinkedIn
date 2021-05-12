@@ -18,7 +18,7 @@ class Profile extends Component {
   getProfile = async () => {
     try {
       const requestProfile = await fetch(
-        "https://striveschool-api.herokuapp.com/api/profile/me",
+        "https://striveschool-api.herokuapp.com/api/profile/609a5eb3dfccc50015a6bbba",
         {
           method: "GET",
           headers: {
@@ -50,7 +50,7 @@ class Profile extends Component {
               <About />
               <Dashboard />
               <Activity />
-              <Experience profileId={this.state.profile._Id} />
+              <Experience profileId={profileId} />
             </>
           )}
         </Col>
