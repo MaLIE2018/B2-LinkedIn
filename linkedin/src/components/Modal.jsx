@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
 
-let url = `https://striveschool-api.herokuapp.com/api/profile/609a6e3bdfccc50015a6bbbe/experiences`;
+let url = `https://striveschool-api.herokuapp.com/api/profile/experiences`;
 
 class Modal extends Component {
   state = {
