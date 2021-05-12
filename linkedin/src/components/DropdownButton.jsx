@@ -1,14 +1,15 @@
 import {Dropdown,t} from "react-bootstrap";
 
-const DropdownButton = () => {
+const DropdownButton = ({ Name , Background, Border}) => {
 	return (
 		<Dropdown>
 			<Dropdown.Toggle
 				style={{borderRadius: "50px", marginRight: "10px"}}
-				variant="primary"
-				id="dropdown-basic"
+				variant={Background}
+                id="dropdown-basic"
+                border={Border}
 			>
-				Open to
+                { Name}
 			</Dropdown.Toggle>
 
 			<Dropdown.Menu>
