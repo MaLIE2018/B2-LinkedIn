@@ -3,9 +3,8 @@ import { useState, useEffect } from "react";
 import "../css/ProfileTop.css";
 
 function ModalExperience(props) {
-  let url = `https://striveschool-api.herokuapp.com/api/profile/${props.item.user}/experiences/`;
+  let url = `https://striveschool-api.herokuapp.com/api/profile/${props.profileId}/experiences`;
 
-  const [lgShow, setLgShow] = useState(false);
   const [data, setData] = useState({
     experience: {
       role: "",
@@ -16,13 +15,14 @@ function ModalExperience(props) {
       area: "",
     },
     dates: {
-      sMonth: "",
+      sMonth: null,
       sYear: null,
-      eMonth: "",
+      eMonth: null,
       eYear: null,
     },
   });
   const [state, setState] = useState(false);
+  const [formData, setFormData] = useState(undefined);
 
   const updateChanges = (event) => {
     setState(event.target.checked);
@@ -33,14 +33,12 @@ function ModalExperience(props) {
     let sMonth = data.dates.sMonth;
     let eYear = data.dates.eYear;
     let eMonth = data.dates.eMonth;
-    let startDate = sYear ? new Date(sYear, sMonth, 1) : "";
-    let endDate = eYear ? new Date(eYear, eMonth, 1) : "";
-    if (startDate) startDate = startDate.toISOString();
-    if (endDate) {
-      endDate = endDate.toISOString();
-    } else {
-      endDate = null;
-    }
+    let startDate =
+      !isNaN(sYear) && !isNaN(sMonth) ? new Date(sYear, sMonth, 1) : null;
+    let endDate =
+      !isNaN(eYear) && !isNaN(eMonth) ? new Date(eYear, eMonth, 1) : null;
+    if (startDate !== null) startDate = startDate.toISOString();
+    if (endDate !== null) endDate = endDate.toISOString();
     if (startDate || endDate) {
       setData((data) => {
         return {
@@ -60,8 +58,7 @@ function ModalExperience(props) {
   }, [data.dates]);
 
   useEffect(() => {
-    if (props.showModal) {
-      setLgShow(true);
+    if (props.open) {
       fillData();
     }
   }, [props]);
@@ -118,10 +115,42 @@ function ModalExperience(props) {
     });
   };
 
+  const handleFileSaving = (e) => {
+    e.preventDefault();
+    const file = e.currentTarget.files[0];
+    let form_data = new FormData();
+    form_data.append("experience", file);
+    setFormData((formData) => {
+      return {
+        form_data,
+      };
+    });
+  };
+
+  const handFileUpload = async (data) => {
+    console.log(formData);
+    try {
+      if (formData !== undefined) {
+        let newRes = await fetch(url + `/${data._id}/picture`, {
+          method: "POST",
+          headers: {
+            Authorization: "Bearer " + props.bearerToken,
+          },
+          body: formData.form_data,
+        });
+        if (newRes.ok) {
+          console.log("FileUploaded Experience");
+        }
+      }
+    } catch (error) {
+      console.log("fileUpload failed", error);
+    }
+  };
+
   const handleDelete = async (e) => {
     e.preventDefault();
     try {
-      let response = await fetch(url + props.item._id, {
+      let response = await fetch(url + "/" + props.item._id, {
         method: "DELETE",
         headers: {
           Authorization: "Bearer " + props.bearerToken,
@@ -130,8 +159,25 @@ function ModalExperience(props) {
       });
       if (response.ok) {
         console.log("Experience Deleted");
-        // props.onUpdate(e, true);
-        setLgShow(false);
+        setData((data) => {
+          return {
+            experience: {
+              role: "",
+              company: "",
+              startDate: "",
+              endDate: "",
+              description: "",
+              area: "",
+            },
+            dates: {
+              sMonth: "",
+              sYear: null,
+              eMonth: "",
+              eYear: null,
+            },
+          };
+        });
+        props.onUpdate();
       } else {
         console.log("Something went wrong!");
       }
@@ -142,9 +188,14 @@ function ModalExperience(props) {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
+    let method = "POST";
+    if (props.item?._id) {
+      method = "PUT";
+      url += "/" + props.item._id;
+    }
     try {
-      let response = await fetch(url + props.item._id, {
-        method: "PUT",
+      let response = await fetch(url, {
+        method: method,
         headers: new Headers({
           Authorization: "Bearer " + props.bearerToken,
           "Content-Type": "application/json",
@@ -154,8 +205,27 @@ function ModalExperience(props) {
 
       if (response.ok) {
         console.log("Experience Updated");
-        // props.onUpdate(e, true);
-        setLgShow(false);
+        const data = await response.json();
+        await handFileUpload(data);
+        setData((data) => {
+          return {
+            experience: {
+              role: "",
+              company: "",
+              startDate: "",
+              endDate: "",
+              description: "",
+              area: "",
+            },
+            dates: {
+              sMonth: "",
+              sYear: null,
+              eMonth: "",
+              eYear: null,
+            },
+          };
+        });
+        props.onUpdate();
       } else {
         console.log("Something went wrong!");
       }
@@ -169,8 +239,8 @@ function ModalExperience(props) {
       <Modal
         size='lg'
         id='modalExperience'
-        show={lgShow}
-        onHide={() => setLgShow(false)}
+        show={props.open}
+        onHide={props.onShowModal}
         aria-labelledby='example-modal-sizes-title-lg'
         scrollable={true}>
         <Modal.Header closeButton>
@@ -584,6 +654,12 @@ function ModalExperience(props) {
                     type='submit'>
                     Link
                   </Button>
+                  <input
+                    type='file'
+                    id='myfile'
+                    name='myfile'
+                    accept='image/jpeg, image/png'
+                    onChange={handleFileSaving}></input>
                 </div>
                 <br />
                 <h6 className='p-1'>
@@ -615,8 +691,8 @@ function ModalExperience(props) {
                 <div>
                   <h5>Share with network</h5>
                   <p>
-                    If enabled, your network may be informed of job chnages,
-                    education chnages and work anniversaries.{" "}
+                    If enabled, your network may be informed of job chances,
+                    education chances and work anniversaries.{" "}
                     <a href='/'>Learn how these are shared and when</a>
                   </p>
                 </div>

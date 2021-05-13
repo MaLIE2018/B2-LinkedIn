@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Image, Col, Row, Container, ListGroup } from "react-bootstrap";
+import { Col, ListGroup } from "react-bootstrap";
 import {
   ThumbsUpOutline,
   ChatbubblesOutline,
@@ -7,16 +7,20 @@ import {
   SendOutline,
   EllipsisHorizontalOutline,
 } from "react-ionicons";
+
 import Box from "./parts/Box";
 import comments from "../assets/img/comments.PNG";
-import "../css/ItemsList.css";
+import "../css/MyNewsFeed.css";
+import dateDiff, { checkImg } from "../helper/datediff";
 class MyNewsFeed extends React.Component {
   render() {
+    const now = new Date();
     return (
       <>
         {this.props.posts.length > 0 &&
           this.props.posts.map((post) => (
             <Box
+              key={post._id}
               render={(state) => (
                 <>
                   <ListGroup>
@@ -37,7 +41,7 @@ class MyNewsFeed extends React.Component {
                             title={"thumb"}
                             height='25px'
                             width='25px'
-                            className='float-right'
+                            className='float-right btn'
                           />
                         </Col>
                       </div>
@@ -67,11 +71,16 @@ class MyNewsFeed extends React.Component {
                           <div
                             className='text-muted'
                             style={{ fontSize: "0.8rem" }}>
+                            <span>{dateDiff(post.createdAt, now)}</span>
                             {post.user?.title}
                           </div>
                         </Col>
                       </div>
                       <div>{post.text}</div>
+                      <div>
+                        {" "}
+                        {post?.image && <img src={post.image} alt='post' />}
+                      </div>
                       <div style={{ fontSize: "0.8rem" }} className='mt-5'>
                         <img src={comments} alt='comment' /> <a href='/'>35 </a>
                         <a href='/'>23 comments</a>
@@ -131,19 +140,3 @@ class MyNewsFeed extends React.Component {
 }
 
 export default MyNewsFeed;
-{
-  /* <Card border='info' className='my-4'>
-              <Card.Header>
-                <Image
-                  height='50px'
-                  width='50px'
-                  src={post.user?.image}
-                  roundedCircle
-                />
-              </Card.Header>
-              <Card.Body>
-                <Card.Title>{post.user?.name}</Card.Title>
-                <Card.Text>{post.text}</Card.Text>
-              </Card.Body>
-            </Card> */
-}

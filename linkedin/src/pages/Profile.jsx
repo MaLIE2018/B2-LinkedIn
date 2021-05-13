@@ -15,7 +15,11 @@ class Profile extends Component {
         <Col md={8}>
           {profileId && (
             <>
-              <ProfileTop profile={this.props.profile} />
+              <ProfileTop
+                profile={this.props.profile}
+                bearerToken={this.props.bearerToken}
+                onDidUpdate={this.props.onDidUpdate}
+              />
               <About />
               <Dashboard />
               <Activity />
