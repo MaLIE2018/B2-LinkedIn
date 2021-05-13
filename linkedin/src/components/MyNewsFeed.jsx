@@ -12,7 +12,96 @@ import Box from "./parts/Box";
 import comments from "../assets/img/comments.PNG";
 import "../css/MyNewsFeed.css";
 import dateDiff, { checkImg } from "../helper/datediff";
+import PostsModal from "./PostsModal";
 class MyNewsFeed extends React.Component {
+  state = {
+    post: {
+      text: "",
+    },
+    formData: undefined,
+    showModal: false,
+    currentPost: {
+      text: "",
+    },
+  };
+
+  createPost = async (e) => {
+    e.preventDefault();
+    if (this.state.post.text.length > 10) {
+      try {
+        let response = await fetch(
+          "https://striveschool-api.herokuapp.com/api/posts/",
+          {
+            method: "POST",
+            headers: {
+              Authorization: "Bearer " + this.props.bearerToken,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(this.state.post),
+          }
+        );
+        if (response.ok) {
+          if (this.state.formData !== undefined) {
+            const data = await response.json();
+            const id = data._id;
+            let newRes = await fetch(
+              "https://striveschool-api.herokuapp.com/api/posts/" + id,
+              {
+                method: "POST",
+                headers: {
+                  Authorization: "Bearer " + this.props.bearerToken,
+                },
+                body: this.state.formData,
+              }
+            );
+            if (newRes.ok) {
+              console.log("FileUploaded");
+            }
+            this.props.onHandleUpdate(e, true);
+          }
+        } else {
+          console.log("Something went wrong!");
+        }
+      } catch (error) {
+        console.log(`Something went wrong! ${error}`);
+      }
+    }
+  };
+
+  handleFileUpload = (e) => {
+    e.preventDefault();
+    const file = e.currentTarget.files[0];
+    let form_data = new FormData();
+    form_data.append("post", file);
+    this.setState((state) => {
+      return {
+        formData: form_data,
+      };
+    });
+  };
+
+  handleChange = (e) => {
+    this.setState((state) => {
+      return {
+        post: { text: e.target.value },
+      };
+    });
+  };
+
+  handleShowModal = () => {
+    this.setState((state) => {
+      return {
+        showModal: !this.state.showModal,
+      };
+    });
+  };
+  handleEditButtonClick = (e, post = {}) => {
+    e.preventDefault();
+    this.setState((state) => {
+      return { currentPost: post, showModal: !this.state.showModal };
+    });
+  };
+
   render() {
     const now = new Date();
     return (
@@ -21,6 +110,7 @@ class MyNewsFeed extends React.Component {
           this.props.posts.map((post) => (
             <Box
               key={post._id}
+              item={post}
               render={(state) => (
                 <>
                   <ListGroup>
@@ -42,6 +132,9 @@ class MyNewsFeed extends React.Component {
                             height='25px'
                             width='25px'
                             className='float-right btn'
+                            onClick={(e) =>
+                              this.handleEditButtonClick(e, state.item)
+                            }
                           />
                         </Col>
                       </div>
@@ -134,6 +227,17 @@ class MyNewsFeed extends React.Component {
               )}
             />
           ))}
+        <PostsModal
+          currentPost={this.state.currentPost}
+          onCreatePost={this.createPost}
+          onHandleFileUpload={this.handleFileUpload}
+          open={this.state.showModal}
+          onHandleShowModal={this.handleShowModal}
+          onHandleChange={this.handleChange}
+          rounded={this.props.rounded}
+          profile={this.props.profile}
+          text={this.state.post.text}
+        />
       </>
     );
   }

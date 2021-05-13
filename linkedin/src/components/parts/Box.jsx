@@ -11,6 +11,7 @@ class Box extends Component {
     this.state = {
       edit: true,
       openCollapse: false,
+      item: this.props.item,
     };
   }
 
@@ -44,7 +45,7 @@ class Box extends Component {
           )}
           {this.props?.subtitle && <span>{this.props.subtitle}</span>}
           {this.props.children}
-          {this.props.render(this.state.openCollapse)}
+          {this.props.render(this.state)}
         </Card.Body>
         {footerText !== undefined && (
           <BoxFooter

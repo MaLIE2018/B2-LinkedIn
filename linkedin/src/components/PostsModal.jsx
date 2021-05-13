@@ -1,14 +1,16 @@
 import { Button, Modal, Row, Col, Form } from "react-bootstrap";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { CaretDownOutline, GlobeOutline, ImageOutline } from "react-ionicons";
 
 function PostsModal(props) {
   const inputRef = useRef();
+  const [edit, setEdit] = useState(false);
 
   useEffect(() => {
-    // console.log(inputRef);
-    // inputRef.current.focus();
-  });
+    if (props.currentPost?.text) {
+      document.querySelector("#postText").value = props.currentPost.text;
+    }
+  }, [props.currentPost]);
 
   const handleCreatePost = (e) => {
     props.onCreatePost(e);

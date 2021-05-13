@@ -18,7 +18,12 @@ class PeopleAlsoViewed extends Component {
         }
         footerText={"Show more"}
         render={(open) => (
-          <ItemsList rounded={true} connect={true} items={people} open={open} />
+          <ItemsList
+            rounded={true}
+            connect={true}
+            items={people}
+            open={open.openCollapse}
+          />
         )}
       />
     );

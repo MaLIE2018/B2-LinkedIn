@@ -69,7 +69,14 @@ class Feed extends Component {
             onPostsClick={this.getMyPosts}
             onHandleUpdate={this.handleUpdate}
           />
-          <MyNewsFeed posts={this.state.posts} />
+          <MyNewsFeed
+            posts={this.state.posts}
+            bearerToken={this.props.bearerToken}
+            profile={this.props.profile}
+            rounded={true}
+            onPostsClick={this.getMyPosts}
+            onHandleUpdate={this.handleUpdate}
+          />
         </Col>
         <Col md={3}>
           <AddToYourFeed />
