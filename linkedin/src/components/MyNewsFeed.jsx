@@ -19,7 +19,7 @@ class MyNewsFeed extends React.Component {
 		if (requestPosts.ok) {
 			const resp = await requestPosts.json();
 			this.setState({ posts: resp });
-			console.log(this.state.posts[0]);
+			// console.log(this.state.posts[0]);
 		}
 	};
 	componentDidMount = () => {
@@ -30,7 +30,7 @@ class MyNewsFeed extends React.Component {
 			<>
 				{this.state.posts.length > 0 &&
 					this.state.posts.map((post) => (
-						<Card border="danger" className="my-4 w-75">
+						<Card border="info" className="mt-5 w-75">
 							<Card.Header>
 								<Image
 									height="50px"
