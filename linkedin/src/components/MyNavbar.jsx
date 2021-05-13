@@ -6,7 +6,7 @@ import { ChatboxEllipses } from "react-ionicons";
 import { Notifications } from "react-ionicons";
 import { PersonCircle } from "react-ionicons";
 import { Keypad } from "react-ionicons";
-
+import { Link } from "react-router-dom";
 import {
   Navbar,
   Nav,
@@ -38,7 +38,7 @@ class MyNavbar extends React.Component {
                 </Form>
               </Nav>
               <Nav>
-                <Nav.Link href='#home'>
+                <Nav.Link as={Link} to='/feed'>
                   <div className='d-flex justify-content-center align-items-center'>
                     <Home
                       color={"#00000"}
@@ -103,8 +103,8 @@ class MyNavbar extends React.Component {
                     />
                   </span>
                   <NavDropdown title='Me' id='basic-nav-dropdown'>
-                    <NavDropdown.Item href='#action/3.1'>
-                      Ankit Kumar
+                    <NavDropdown.Item as={Link} to='/profile'>
+                      {this.props.name}
                     </NavDropdown.Item>
                     <NavDropdown.Item href='#action/3.2'>
                       Another action

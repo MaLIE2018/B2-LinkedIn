@@ -6,8 +6,16 @@ import AddButton from "./AddButton";
 import BoxFooter from "./BoxFooter";
 
 class Box extends Component {
-  state = {
-    edit: true,
+  constructor(props) {
+    super(props);
+    this.state = {
+      edit: true,
+      openCollapse: false,
+    };
+  }
+
+  handleOpenCollapse = (bool) => {
+    this.setState((state) => ({ openCollapse: bool }));
   };
 
   render() {
@@ -34,11 +42,21 @@ class Box extends Component {
           )}
           {this.props?.subtitle && <span>{this.props.subtitle}</span>}
           {this.props.children}
+          {this.props.render(this.state.openCollapse)}
         </Card.Body>
-        {footerText !== undefined && <BoxFooter footerText={footerText} />}
+        {footerText !== undefined && (
+          <BoxFooter
+            footerText={footerText}
+            onHandleOpenCollapse={this.handleOpenCollapse}
+          />
+        )}
       </Card>
     );
   }
 }
+
+// Box.propTypes = {
+//   children: PropTypes.func.isRequired,
+// };
 
 export default Box;
