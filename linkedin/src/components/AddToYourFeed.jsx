@@ -18,7 +18,12 @@ class AddToYourFeed extends Component {
         }
         footerText={"View all recommendations"}
         render={(open) => (
-          <ItemsList rounded={true} follow={true} items={people} open={open} />
+          <ItemsList
+            rounded={true}
+            follow={true}
+            items={people}
+            open={open.openCollapse}
+          />
         )}
       />
     );

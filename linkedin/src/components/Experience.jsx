@@ -6,8 +6,8 @@ class Experience extends Component {
   state = {
     experiences: [],
     currentExperience: {},
-    showModal: false,
     updated: false,
+    open: false,
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -44,38 +44,50 @@ class Experience extends Component {
   componentDidMount() {
     this.postExp();
   }
-  handleClick = (e, item) => {
+
+  handleEditButtonClick = (e, item = {}) => {
     e.preventDefault();
     this.setState((state) => {
-      return { currentExperience: item, showModal: true };
+      return { currentExperience: item, open: true };
     });
   };
 
-  handleUpdate = (e, bool) => {
-    console.log("Updating...");
-    e.preventDefault();
+  handleShowModal = () => {
     this.setState((state) => {
-      return { updated: bool };
+      return {
+        open: !this.state.open,
+      };
     });
   };
+
+  handleUpdate = (bool) => {
+    console.log("Updating...");
+    this.setState((state) => {
+      return { updated: bool, open: false, currentExperience: {} };
+    });
+  };
+
   render() {
     return this.state.experiences.length !== 0 ? (
       <Box
         add={true}
+        onEditButtonClick={this.handleEditButtonClick}
         title='Experience'
         render={(state) => (
           <>
             <ItemsList
-              rounded={true}
+              rounded={false}
               edit={true}
-              onEditButtonClick={this.handleClick}
+              onEditButtonClick={this.handleEditButtonClick}
               items={this.state.experiences}
             />
             <ModalExperience
+              profileId={this.props.profileId}
               bearerToken={this.props.bearerToken}
-              showModal={this.state.showModal}
               onUpdate={this.handleUpdate}
               item={this.state.currentExperience}
+              open={this.state.open}
+              onShowModal={this.handleShowModal}
             />
           </>
         )}

@@ -8,6 +8,9 @@ import Experience from "../components/Experience";
 import PeopleAlsoViewed from "../components/PeopleAlsoViewed";
 
 class Profile extends Component {
+  componentDidMount() {
+    document.title = `Linkedin - Profile ${this.props.profile.name} `;
+  }
   render() {
     const profileId = this.props.profile._id;
     return (
@@ -15,7 +18,11 @@ class Profile extends Component {
         <Col md={8}>
           {profileId && (
             <>
-              <ProfileTop profile={this.props.profile} />
+              <ProfileTop
+                profile={this.props.profile}
+                bearerToken={this.props.bearerToken}
+                onDidUpdate={this.props.onDidUpdate}
+              />
               <About />
               <Dashboard />
               <Activity />

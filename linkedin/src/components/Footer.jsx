@@ -14,27 +14,27 @@ const Footer = () => {
 						<div className="col-md-2">
 							<nav>
 								<li className="py-1">
-									<a className="text-muted" href="#">
+									<a className="text-muted" href="/">
 										About
 									</a>
 								</li>
 								<li className="py-1">
-									<a className="text-muted" href="#">
+									<a className="text-muted" href="/">
 										Community Guidelines
 									</a>
 								</li>
 								<li className="py-1">
-									<a className="text-muted" href="#">
+									<a className="text-muted" href="/">
 										Privacy and Terms
 									</a>
 								</li>
 								<li className="py-1">
-									<a className="text-muted" href="#">
+									<a className="text-muted" href="/">
 										Sales Solutions
 									</a>
 								</li>
 								<li className="py-1">
-									<a className="text-muted" href="#">
+									<a className="text-muted" href="/">
 										Safety Center
 									</a>
 								</li>
@@ -43,22 +43,22 @@ const Footer = () => {
 						<Col className="col-md-2">
 							<nav>
 								<li className="py-1">
-									<a className="text-muted" href="#">
+									<a className="text-muted" href="/">
 										Accessibility
 									</a>
 								</li>
 								<li className="py-1">
-									<a className="text-muted" href="#">
+									<a className="text-muted" href="/">
 										Careers
 									</a>
 								</li>
 								<li className="py-1">
-									<a className="text-muted" href="#">
+									<a className="text-muted" href="/">
 										Ad choices
 									</a>
 								</li>
 								<li className="py-1">
-									<a className="text-muted" href="#">
+									<a className="text-muted" href="/">
 										Mobile
 									</a>
 								</li>
@@ -67,22 +67,22 @@ const Footer = () => {
 						<Col className="col-md-2">
 							<nav>
 								<li className="py-1">
-									<a className="text-muted" href="#">
+									<a className="text-muted" href="/">
 										Talent Solutions
 									</a>
 								</li>
 								<li className="py-1">
-									<a className="text-muted" href="#">
+									<a className="text-muted" href="/">
 										Marketing Solutions
 									</a>
 								</li>
 								<li className="py-1">
-									<a className="text-muted" href="#">
+									<a className="text-muted" href="/">
 										Advertising
 									</a>
 								</li>
 								<li className="py-1">
-									<a className="text-muted" href="#">
+									<a className="text-muted" href="/">
 										Small Business
 									</a>
 								</li>
@@ -91,17 +91,17 @@ const Footer = () => {
 						<Col className="col-md-2">
 							<nav>
 								<li className="py-1">
-									<a className="text-muted" href="#">
+									<a className="text-muted" href="/">
 										Gift Cards
 									</a>
 								</li>
 								<li className="py-1">
-									<a className="text-muted" href="#">
+									<a className="text-muted" href="/">
 										Terms Of Use
 									</a>
 								</li>
 								<li className="py-1">
-									<a className="text-muted" href="#">
+									<a className="text-muted" href="/">
 										Corporate Information
 									</a>
 								</li>
@@ -117,7 +117,7 @@ const Footer = () => {
 										width="25px"
 									/>
 									<span>
-										<a className="text-muted" href="#">
+										<a className="text-muted" href="/">
 											Questions?
 										</a>
 										<p className="text-muted text">Visit our help center.</p>
@@ -131,7 +131,7 @@ const Footer = () => {
 										width="25px"
 									/>
 
-									<a className="text-muted" href="#">
+									<a className="text-muted" href="/">
 										Manage your account and privacy
 									</a>
 									<p className="text-muted text">Go to your settings.</p>
