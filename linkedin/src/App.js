@@ -19,6 +19,7 @@ class App extends React.Component {
       posts:[],
       query: "",
       currProfile:[],
+      currProfileId: undefined
     };
   }
   // 609a5eb3dfccc50015a6bbba Ankit
@@ -38,6 +39,26 @@ class App extends React.Component {
       if (requestProfile.ok) {
         const response = await requestProfile.json();
         this.setState({ myProfile: response, didUpdate: false });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  getProfile = async () => {
+    try {
+      const requestProfile = await fetch(
+        'https://striveschool-api.herokuapp.com/api/profile/'+ this.state.currProfileId,
+        {
+          method: 'GET',
+          headers: {
+            Authorization: 'Bearer ' + this.state.bearerToken,
+          },
+        }
+      );
+      if (requestProfile.ok) {
+        const response = await requestProfile.json();
+        this.setState({ currProfile: response, didUpdate: false });
       }
     } catch (error) {
       console.log(error);
@@ -76,6 +97,9 @@ class App extends React.Component {
       this.getMyProfile()
       this.getPosts()
     }
+    if(prevState.currProfileId !== this.state.currProfileId){
+      this.getProfile()
+    }
   }
 
   handleUpdate = (bool) => {
@@ -88,6 +112,12 @@ class App extends React.Component {
       e.preventDefault();
       this.setState((state) => {
         return { query: e.target.value,}
+          
+      })
+  }
+  handleCurrProfileChange = (currProfileId) => {
+      this.setState((state) => {
+        return { currProfileId: currProfileId,}
           
       })
   }
@@ -115,6 +145,8 @@ class App extends React.Component {
 										profile={this.state.currProfile}
 										bearerToken={this.state.bearerToken}
                     onDidUpdate={this.handleUpdate}
+                    currProfileId={this.state.currProfileId}
+                    onCurrProfileChange={this.handleCurrProfileChange}
                   />} path={["/profile/:id"]}/>
       </Switch>
 			<Route render={(routerProps) => <Feed
