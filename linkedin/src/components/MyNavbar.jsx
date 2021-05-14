@@ -1,5 +1,5 @@
 import React from "react";
-import { Home } from "react-ionicons";
+import { Home, SearchOutline } from "react-ionicons";
 import { People } from "react-ionicons";
 import { Briefcase } from "react-ionicons";
 import { ChatboxEllipses } from "react-ionicons";
@@ -33,17 +33,26 @@ class MyNavbar extends React.Component {
   state = {};
   render() {
     return (
-      <header>
+      <header className='fixed-top'>
         <Container sm='fluid'>
           <Navbar className='nav-styles' bg='white' expand='lg'>
-            <Navbar.Brand>
+            <Navbar.Brand as={Link} to='/' className='pr-0 mr-1'>
               <Image src={mainLogo} rounded className='linkedin_logo' />
             </Navbar.Brand>
 
             <Navbar.Toggle aria-controls='basic-navbar-nav' />
             <Navbar.Collapse id='basic-navbar-nav'>
               <Nav className='mr-auto'>
-                <Form className='searchBar'>
+                <Form
+                  className='searchBar d-flex flex-row align-items-center'
+                  style={{ backgroundColor: "#EEF3F8" }}>
+                  <SearchOutline
+                    color={"#00000"}
+                    title={"search"}
+                    height='20px'
+                    className='ml-2'
+                    width='20px'
+                  />
                   <FormControl
                     type='text'
                     placeholder='Search'
@@ -109,12 +118,14 @@ class MyNavbar extends React.Component {
                 </Nav.Link>
                 <div className='d-flex flex-column justify-content-center align-items-center ml-3'>
                   <span>
-                    <PersonCircle
-                      color={"#00000"}
-                      title={""}
-                      height='20px'
-                      width='20px'
-                    />
+                    {
+                      <img
+                        src={this.props.image}
+                        alt='profile'
+                        style={{ height: "20px", width: "20px" }}
+                        className='rounded-circle'
+                      />
+                    }
                   </span>
                   <NavDropdown title='Me' id='basic-nav-dropdown'>
                     <NavDropdown.Item as={Link} to='/profile'>
@@ -145,7 +156,7 @@ class MyNavbar extends React.Component {
                   </span>
                   <NavDropdown title='Work' id='basic-nav-dropdown'>
                     <NavDropdown.Item href='#action/3.1'>
-                      Ankit Kumar
+                      {this.props.name}
                     </NavDropdown.Item>
                     <NavDropdown.Item href='#action/3.2'>
                       Another action

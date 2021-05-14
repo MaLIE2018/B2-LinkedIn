@@ -6,7 +6,7 @@ import { Row, Col } from "react-bootstrap";
 class Search extends Component {
   render() {
     return (
-      <Row>
+      <Row className='mt-5'>
         <Col md={8}>
           <Box render={(state) => <div>sometext</div>} />
         </Col>

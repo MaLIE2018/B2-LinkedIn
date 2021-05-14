@@ -1,20 +1,18 @@
-import React, { Component } from 'react';
-import Box from './parts/Box';
-import YourDashboard from './YourDashboard';
+import React, { Component } from "react";
+import Box from "./parts/Box";
+import YourDashboard from "./YourDashboard";
 class Dashboard extends Component {
   render() {
     return (
       <Box
-        padding={false}
         edit={false}
-        title={false}
-        // subtitle={
-        //   <span style={{ fontStyle: 'italic', color: '#71767C' }}>
-        //     Private for you
-        //   </span>
-        // }
-        color={'#DCE6F1'}
-        title={'Dashboard'}
+        subtitle={
+          <span style={{ fontStyle: "italic", color: "#71767C" }}>
+            Private for you
+          </span>
+        }
+        color={"#DCE6F1"}
+        title={"Dashboard"}
         render={(state) => <YourDashboard />}
       />
     );
