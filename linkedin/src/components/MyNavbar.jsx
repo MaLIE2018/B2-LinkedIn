@@ -1,5 +1,5 @@
 import React from "react";
-import { Home } from "react-ionicons";
+import { Home, SearchOutline } from "react-ionicons";
 import { People } from "react-ionicons";
 import { Briefcase } from "react-ionicons";
 import { ChatboxEllipses } from "react-ionicons";
@@ -18,23 +18,46 @@ import {
 } from "react-bootstrap";
 import mainLogo from "../assets/img/Logo.png";
 import "../css/MyNavbar.css";
-
+import { withRouter } from "react-router-dom";
+import FilterBar from "./FilterBar";
 class MyNavbar extends React.Component {
+  handleChangeQuery = (e) => {
+    this.props.onChangeQuery(e);
+    if (e.target.value <= 1) {
+      this.props.history.push("/");
+    } else {
+      this.props.history.push("/search/q=" + e.target.value);
+    }
+  };
+
   state = {};
   render() {
     return (
-      <header>
+      <header className='fixed-top'>
         <Container sm='fluid'>
           <Navbar className='nav-styles' bg='white' expand='lg'>
-            <Navbar.Brand>
+            <Navbar.Brand as={Link} to='/' className='pr-0 mr-1'>
               <Image src={mainLogo} rounded className='linkedin_logo' />
             </Navbar.Brand>
 
             <Navbar.Toggle aria-controls='basic-navbar-nav' />
             <Navbar.Collapse id='basic-navbar-nav'>
               <Nav className='mr-auto'>
-                <Form className='searchBar'>
-                  <FormControl type='text' placeholder='Search'></FormControl>
+                <Form
+                  className='searchBar d-flex flex-row align-items-center'
+                  style={{ backgroundColor: "#EEF3F8" }}>
+                  <SearchOutline
+                    color={"#00000"}
+                    title={"search"}
+                    height='20px'
+                    className='ml-2'
+                    width='20px'
+                  />
+                  <FormControl
+                    type='text'
+                    placeholder='Search'
+                    value={this.props.query}
+                    onChange={this.handleChangeQuery}></FormControl>
                 </Form>
               </Nav>
               <Nav>
@@ -95,12 +118,14 @@ class MyNavbar extends React.Component {
                 </Nav.Link>
                 <div className='d-flex flex-column justify-content-center align-items-center ml-3'>
                   <span>
-                    <PersonCircle
-                      color={"#00000"}
-                      title={""}
-                      height='20px'
-                      width='20px'
-                    />
+                    {
+                      <img
+                        src={this.props.image}
+                        alt='profile'
+                        style={{ height: "20px", width: "20px" }}
+                        className='rounded-circle'
+                      />
+                    }
                   </span>
                   <NavDropdown title='Me' id='basic-nav-dropdown'>
                     <NavDropdown.Item as={Link} to='/profile'>
@@ -131,7 +156,7 @@ class MyNavbar extends React.Component {
                   </span>
                   <NavDropdown title='Work' id='basic-nav-dropdown'>
                     <NavDropdown.Item href='#action/3.1'>
-                      Ankit Kumar
+                      {this.props.name}
                     </NavDropdown.Item>
                     <NavDropdown.Item href='#action/3.2'>
                       Another action
@@ -154,9 +179,10 @@ class MyNavbar extends React.Component {
             </Navbar.Collapse>
           </Navbar>
         </Container>
+        {this.props.query.length > 0 && <FilterBar />}
       </header>
     );
   }
 }
 
-export default MyNavbar;
+export default withRouter(MyNavbar);

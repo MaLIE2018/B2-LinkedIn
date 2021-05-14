@@ -5,7 +5,7 @@ const LinkButton = (props) => {
     <button
       className='btn p-0'
       style={{
-        color: "#67A0D9",
+        color: props.color,
         fontWeight: "bold",
       }}
       href='#'>
