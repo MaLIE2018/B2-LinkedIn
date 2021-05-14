@@ -4,7 +4,7 @@ import AddToYourFeed from "../components/AddToYourFeed";
 import MyNewsFeed from "./../components/MyNewsFeed";
 import Box from "./../components/parts/Box";
 import Posts from "./../components/Posts";
-import { checkImg } from "../helper/datediff";
+
 import { CaretDownOutline } from "react-ionicons";
 import WelcomeBox from "./../components/WelcomeBox";
 class Feed extends Component {
@@ -13,7 +13,6 @@ class Feed extends Component {
   };
 
   componentDidMount = () => {
-    // this.getPosts();
     document.title = "Linkedin - Feed";
   };
 
@@ -23,7 +22,8 @@ class Feed extends Component {
     }
   };
 
-  getMyPosts = () => {
+  getMyPosts = (e) => {
+    e.preventDefault();
     const posts = this.props.posts;
     this.setState((state) => {
       return {
