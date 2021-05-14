@@ -6,7 +6,7 @@ class About extends Component {
       <Box
         edit={true}
         title={<span className='font-weight-bold'>About</span>}
-        render={(state) => "about"}
+        render={(state) => this.props.bio}
       />
     );
   }

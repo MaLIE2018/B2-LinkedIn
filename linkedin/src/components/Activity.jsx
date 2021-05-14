@@ -5,7 +5,7 @@ const Activity = () => {
   return (
     <Box
       edit={false}
-      subtitle={<LinkButton title={"296 followers"} />}
+      subtitle={<LinkButton title={"296 followers"} color='#67A0D9' />}
       title={"Activity"}
       footerText={"See all Activity"}
       render={(state) => <div>"Test"</div>}

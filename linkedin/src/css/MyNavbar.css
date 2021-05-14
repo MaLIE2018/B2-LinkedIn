@@ -1,6 +1,6 @@
 .linkedin_logo {
-  height: 33px;
-  width: 33px;
+  height: 40px;
+  width: 40px;
 }
 
 .searchBar input {
@@ -38,3 +38,8 @@ header {
 /* align-items: center; */
 /* flex-direction: column; */
 /* } */
+
+.header {
+  min-height: 8vh;
+  top: 0;
+}
