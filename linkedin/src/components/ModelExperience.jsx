@@ -3,7 +3,7 @@ import {useState, useEffect} from "react";
 import "../css/ProfileTop.css";
 
 function ModalExperience(props) {
-	let url = `https://striveschool-api.herokuapp.com/api/profile/${props.profileId}/experiences`;
+	const url = `https://striveschool-api.herokuapp.com/api/profile/${props.profileId}/experiences`;
 
 	const [data, setData] = useState({
 		experience: {
@@ -22,8 +22,8 @@ function ModalExperience(props) {
 		},
 	});
 	const [state, setState] = useState(false);
-  const [formData, setFormData] = useState(undefined);
-  const [addLink, setAddLink] = useState(false);
+	const [formData, setFormData] = useState(undefined);
+	const [addLink, setAddLink] = useState(false);
 
 	const updateChanges = (event) => {
 		setState(event.target.checked);
@@ -190,12 +190,13 @@ function ModalExperience(props) {
 	const handleUpdate = async (e) => {
 		e.preventDefault();
 		let method = "POST";
+		let fetchUrl = url;
 		if (props.item?._id) {
 			method = "PUT";
-			url += "/" + props.item._id;
+			fetchUrl = url + "/" + props.item._id;
 		}
 		try {
-			let response = await fetch(url, {
+			let response = await fetch(fetchUrl, {
 				method: method,
 				headers: new Headers({
 					Authorization: "Bearer " + props.bearerToken,
@@ -666,10 +667,10 @@ function ModalExperience(props) {
 											label="Update"
 											onChange={handleFileSaving}
 										/>
-										<span>Update</span>
+										<span>Upload</span>
 									</label>
 									<Button
-										onClick={()=> setAddLink(!addLink)}
+										onClick={() => setAddLink(!addLink)}
 										className="w-50 m-1 rounded-pill border border-primary "
 										variant="light"
 									>
