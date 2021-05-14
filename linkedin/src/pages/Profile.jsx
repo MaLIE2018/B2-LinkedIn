@@ -6,11 +6,25 @@ import Dashboard from "../components/Dashboard";
 import Activity from "../components/Activity";
 import Experience from "../components/Experience";
 import PeopleAlsoViewed from "../components/PeopleAlsoViewed";
+import { withRouter } from "react-router-dom";
 
 class Profile extends Component {
+  state = {
+    currProfileId: this.props.match.params?.id,
+  };
+
   componentDidMount() {
     document.title = `Linkedin - Profile ${this.props.profile.name} `;
   }
+
+  componentDidUpdate = () => {
+    if (this.state.currProfileId) {
+      if (this.props.currProfileId !== this.state.currProfileId) {
+        this.props.onCurrProfileChange(this.state.currProfileId);
+      }
+    }
+  };
+
   render() {
     const profileId = this.props.profile._id;
     return (
@@ -26,7 +40,7 @@ class Profile extends Component {
                   onDidUpdate={this.props.onDidUpdate}
                 />
                 <About bio={this.props.profile.bio} />
-                <Dashboard />
+                {!this.state.currProfileId && <Dashboard />}
                 <Activity profile={this.props.profile} />
                 <Experience
                   profileId={profileId}
@@ -44,4 +58,4 @@ class Profile extends Component {
   }
 }
 
-export default Profile;
+export default withRouter(Profile);
