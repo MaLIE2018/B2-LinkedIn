@@ -21,7 +21,7 @@ export default class CarouselBadge extends Component {
           <div key={item.id}>
             <span>
               <div className='alert alert-info' role='alert'>
-                A simple info alert—check it out! A simple info alert—check it
+                A simple info it out! A simple info alert—check it
                 out!
               </div>
             </span>

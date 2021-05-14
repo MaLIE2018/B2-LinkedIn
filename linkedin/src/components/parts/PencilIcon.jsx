@@ -1,4 +1,4 @@
-const PencilIcon = ({classname, editProfileImage}) => {
+const PencilIcon = ({classname, editProfileOn}) => {
 	return (
 		<div
 			className={classname}
@@ -13,7 +13,7 @@ const PencilIcon = ({classname, editProfileImage}) => {
 			}}
 		>
 			<svg
-				onClick={editProfileImage}
+				onClick={editProfileOn}
 				xmlns="http://www.w3.org/2000/svg"
 				viewBox="0 0 24 24"
 				data-supported-dps="24x24"

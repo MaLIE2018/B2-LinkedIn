@@ -285,3 +285,9 @@ input[type="checkbox"]:checked:after {
 	bottom: 0;
 	right: 0px;
 }
+
+.textarea{
+	width: 100% !important;
+	margin-right: 0;
+	padding-right: 0;
+}
