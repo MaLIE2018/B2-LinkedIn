@@ -101,7 +101,9 @@ class App extends React.Component {
       onChangeQuery={this.handleChangeQuery}/>
 			<Container sm="fluid" style={{marginTop: "8vh"}} className="pt-2" 
       >
-        {(this.state.query.length === 0 )&& <Ad/>}
+        {(this.state.query.length === 0 )&& <Ad title="Need Developers ASAP? Hire the top 3% of 
+        developers in 48 hours. $0
+          Recruiting fee. Start now."/>}
 			<Route render={(routerProps) => <Profile
 										profile={this.state.profile}
 										bearerToken={this.state.bearerToken}

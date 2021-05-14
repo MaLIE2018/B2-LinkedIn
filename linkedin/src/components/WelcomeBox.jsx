@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, ListGroupItem, ListGroup, Image } from "react-bootstrap";
 import "./../css/WelcomeBox.css";
+import { Link } from "react-router-dom";
 
 class WelcomeBox extends React.Component {
   state = {};
@@ -14,7 +15,14 @@ class WelcomeBox extends React.Component {
             src='https://via.placeholder.com/300x85'
           />
 
-          <Image id='image-icon' src={this.props.profile.image} roundedCircle />
+          <Image
+            id='image-icon'
+            as={Link}
+            to='/profile'
+            src={this.props.profile.image}
+            roundedCircle
+            style={{ cursor: "pointer" }}
+          />
 
           <Card.Body>
             <Card.Title className='text-center mt-5 text-dark mb-2 pb-0 underline'>

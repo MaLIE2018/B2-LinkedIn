@@ -8,6 +8,7 @@ import Posts from "./../components/Posts";
 import { CaretDownOutline } from "react-ionicons";
 import WelcomeBox from "./../components/WelcomeBox";
 import Groups from "./../components/Groups";
+import LatestJobs from "./../components/LatestJobs";
 class Feed extends Component {
   state = {
     posts: [],
@@ -91,6 +92,7 @@ class Feed extends Component {
         </Col>
         <Col md={3}>
           <AddToYourFeed />
+          <LatestJobs profile={this.props.profile} />
         </Col>
       </Row>
     );
