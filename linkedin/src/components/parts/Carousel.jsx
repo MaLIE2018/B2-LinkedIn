@@ -17,7 +17,7 @@ export default class CarouselBadge extends Component {
   render() {
     const { items } = this.state;
     return (
-      <Carousel className='carousel' itemsToShow={2}>
+      <Carousel className='carousel pt-3 pb-3' itemsToShow={2}>
         {items.map((item) => (
           <div key={item.id}>
             {/* <Alert variant="info">Jumbo</Alert> */}
@@ -30,7 +30,7 @@ export default class CarouselBadge extends Component {
 
             <span>
               <div className='alert alert-info' role='alert'>
-                A simple info alert—check it out! A simple info alert—check it
+                A simple info it out! A simple info alert—check it
                 out!
               </div>
             </span>
