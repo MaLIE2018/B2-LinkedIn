@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Card, Col, Row } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import '../css/YourDashboard.css';
 import { People } from 'react-ionicons';
 import { Bookmark } from 'react-ionicons';
@@ -11,29 +11,23 @@ const YourDashboard = () => {
   return (
     <>
       <Card id="dashCard">
-        <Card.Body>
+        <Card.Body className="px-0 pt-0">
           <Card style={{ backgroundColor: '#dce6f1' }} className="pb-4">
-            <h4 style={{ fontWeight: 'normal' }} className="text-dark">
-              Your Dashboard
-            </h4>
-            <h5
-              style={{ fontWeight: 'normal', fontStyle: 'italic' }}
-              className="text-secondary"
-            >
-              Private to you
-            </h5>
             <div
-              className="d-flex justify-content-between bg-light mt-3 p-3 dashBoardContent"
+              className="d-flex justify-content-between bg-light px-3"
               style={{ borderRadius: '10px' }}
             >
-              <div style={{ width: '33.3%', borderRight: '1px solid gray' }}>
+              <div
+                className="dashBoardContent"
+                style={{ width: '33.3%', borderRight: '1px solid gray' }}
+              >
                 <h3 className="text-primary" style={{ fontWeight: 'normal' }}>
                   5
                 </h3>
                 <p>Who viewed your profile</p>
               </div>
               <div
-                className="ml-3"
+                className="ml-3 dashBoardContent"
                 style={{ width: '33.3%', borderRight: '1px solid gray' }}
               >
                 <h3 className="text-primary" style={{ fontWeight: 'normal' }}>
@@ -41,7 +35,7 @@ const YourDashboard = () => {
                 </h3>
                 <p>Article views</p>
               </div>
-              <div className="ml-3" style={{ width: '33.3%' }}>
+              <div className="ml-3 dashBoardContent" style={{ width: '33.3%' }}>
                 <h3 className="text-primary" style={{ fontWeight: 'normal' }}>
                   5
                 </h3>
