@@ -7,6 +7,7 @@ import Posts from "./../components/Posts";
 
 import { CaretDownOutline } from "react-ionicons";
 import WelcomeBox from "./../components/WelcomeBox";
+import Groups from "./../components/Groups";
 class Feed extends Component {
   state = {
     posts: [],
@@ -49,6 +50,7 @@ class Feed extends Component {
             padding={false}
             render={(state) => <WelcomeBox profile={this.props.profile} />}
           />
+          <Groups />
         </Col>
         <Col md={6}>
           <Posts

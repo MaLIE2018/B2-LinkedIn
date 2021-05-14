@@ -1,7 +1,6 @@
 import React from "react";
 import { Card, ListGroupItem, ListGroup, Image } from "react-bootstrap";
 import "./../css/WelcomeBox.css";
-import welcome from "./../assets/img/welcome-camera.svg";
 
 class WelcomeBox extends React.Component {
   state = {};
@@ -58,30 +57,6 @@ class WelcomeBox extends React.Component {
             </ListGroupItem>
             <ListGroupItem>My Items</ListGroupItem>
           </ListGroup>
-        </Card>
-        <Card className='mt-2'>
-          <ListGroup variant='flush' className='underline'>
-            <ListGroup.Item>
-              <Card.Link className='text-primary' href='#'>
-                <strong>Groups</strong>
-              </Card.Link>
-            </ListGroup.Item>
-            <ListGroup.Item>
-              <Card.Link className='text-primary mb-1 pb-1' href='#'>
-                <strong>Events</strong>
-              </Card.Link>
-            </ListGroup.Item>
-            <ListGroup.Item>
-              <Card.Link className='text-primary mb-1 pb-1' href='#'>
-                <strong>Followed Hashtags</strong>
-              </Card.Link>
-            </ListGroup.Item>
-          </ListGroup>
-          <ListGroupItem>
-            <div className='text-center text-muted'>
-              <strong>Discover More</strong>
-            </div>
-          </ListGroupItem>
         </Card>
       </>
     );
