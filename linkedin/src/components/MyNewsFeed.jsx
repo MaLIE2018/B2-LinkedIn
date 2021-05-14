@@ -175,7 +175,13 @@ class MyNewsFeed extends React.Component {
                       <div>{post.text}</div>
                       <div>
                         {" "}
-                        {post?.image && <img src={post.image} alt='post' />}
+                        {post?.image && (
+                          <img
+                            src={post.image}
+                            alt='post'
+                            className='img-fluid'
+                          />
+                        )}
                       </div>
                       <div style={{ fontSize: "0.8rem" }} className='mt-5'>
                         <img src={comments} alt='comment' /> <a href='/'>35 </a>

@@ -111,6 +111,7 @@ class App extends React.Component {
                   />} exact path={["/feed","/"]}/>
       <Route render={(routerProps) => <Search
 										profile={this.state.profile}
+                    posts={this.state.posts}
 										bearerToken={this.state.bearerToken}
                   />} exact path={["/Search/q=:query"]}/>
 			

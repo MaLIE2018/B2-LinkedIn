@@ -166,6 +166,9 @@ class MyNavbar extends React.Component {
               </Nav>
             </Navbar.Collapse>
           </Navbar>
+          {/* {this.props.query.length > 0 && (
+            <div style={{ height: "40px" }}>Test</div>
+          )} */}
         </Container>
       </header>
     );
