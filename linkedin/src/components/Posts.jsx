@@ -15,7 +15,7 @@ class Posts extends Component {
 
   createPost = async (e) => {
     e.preventDefault();
-    if (this.state.post.text.length > 10) {
+    if (this.state.post.text.length >= 10) {
       try {
         let response = await fetch(
           "https://striveschool-api.herokuapp.com/api/posts/",
@@ -45,8 +45,8 @@ class Posts extends Component {
             if (newRes.ok) {
               console.log("FileUploaded");
             }
-            this.props.onHandleUpdate(e, true);
           }
+          this.props.onHandleUpdate(e, true);
         } else {
           console.log("Something went wrong!");
         }

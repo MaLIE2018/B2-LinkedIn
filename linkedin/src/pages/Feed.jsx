@@ -27,6 +27,7 @@ class Feed extends Component {
   };
   componentDidMount = () => {
     this.getPosts();
+    document.title = "Linkedin - Feed";
   };
 
   componentDidUpdate = (prevProps, prevState) => {

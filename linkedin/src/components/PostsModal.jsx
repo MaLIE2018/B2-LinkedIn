@@ -4,17 +4,24 @@ import { CaretDownOutline, GlobeOutline, ImageOutline } from "react-ionicons";
 
 function PostsModal(props) {
   const inputRef = useRef();
-  const [edit, setEdit] = useState(false);
+  const [editor, setEdit] = useState(false);
 
   useEffect(() => {
     if (props.currentPost?.text) {
       document.querySelector("#postText").value = props.currentPost.text;
+      if (props.currentProfileId === props.currentPost.user._id) {
+        setEdit(true);
+      }
     }
-  }, [props.currentPost]);
+  }, [props]);
 
   const handleCreatePost = (e) => {
     props.onCreatePost(e);
     props.onHandleShowModal();
+  };
+
+  const handleUpdatePost = (e) => {
+    props.onUpdatePost(e);
   };
 
   const handleFileUpload = (e) => {
@@ -31,7 +38,9 @@ function PostsModal(props) {
           <Row className='d-flex flex-nowrap mx-1'>
             <Col md={1} className='pl-0'>
               <img
-                src={props.profile.image}
+                src={
+                  editor ? props.profile.image : props.currentPost?.user?.image
+                }
                 alt=''
                 className={"rounded-circle"}
                 style={{ height: "50px" }}
@@ -39,7 +48,9 @@ function PostsModal(props) {
             </Col>
             <Col md={11} className='ml-2'>
               <div>
-                <span className='font-weight-bolder'>{props.profile.name}</span>
+                <span className='font-weight-bolder'>
+                  {editor ? props.profile.name : props.currentPost?.user?.name}
+                </span>
                 <Button
                   style={{ borderRadius: "50px", marginRight: "10px" }}
                   variant='outline-dark'
@@ -95,12 +106,37 @@ function PostsModal(props) {
                   onChange={handleFileUpload}></input>
               </Button>
 
-              <Button
-                variant={props.text.length === 0 ? "light" : "primary"}
-                className='rounded-pill float-right'
-                onClick={handleCreatePost}>
-                Post
-              </Button>
+              {!editor ? (
+                <Button
+                  variant={props.text?.length >= 10 ? "primary" : "light"}
+                  className='rounded-pill float-right'
+                  onClick={handleCreatePost}>
+                  Post
+                </Button>
+              ) : (
+                <>
+                  <Button
+                    variant={"primary"}
+                    className='rounded-pill float-right'
+                    onClick={(e) =>
+                      props.onHandleUpdatePost(
+                        e,
+                        "DELETE",
+                        props.currentPost._id
+                      )
+                    }>
+                    Delete
+                  </Button>
+                  <Button
+                    variant={"primary"}
+                    className='rounded-pill float-right'
+                    onClick={(e) =>
+                      props.onHandleUpdatePost(e, "PUT", props.currentPost._id)
+                    }>
+                    Edit
+                  </Button>
+                </>
+              )}
             </Col>
           </Row>
         </Modal.Body>

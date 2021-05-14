@@ -1,13 +1,8 @@
-import { Button, Modal, Row, Col, Form } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 import React, { useState, useEffect } from "react";
 
 function UpdateImgProfileModal(props) {
-  const [show, setShow] = useState(false);
-
   const [image, setImage] = useState(null);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
   useEffect(() => {}, [image]);
 
