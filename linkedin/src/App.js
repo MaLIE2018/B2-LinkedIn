@@ -9,7 +9,7 @@ import React from "react"
 import Search from './pages/Search'
 import Ad from './components/Ad';
 class App extends React.Component {
-	constructor(props) {
+  constructor(props) {
     super(props);
     this.state = {
       didUpdate: false,
@@ -22,15 +22,15 @@ class App extends React.Component {
   }
   // 609a5eb3dfccc50015a6bbba Ankit
   // Hasib eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDk4ZmE0MTYxOWU1ZDAwMTUxZjhmN2YiLCJpYXQiOjE2MjA2MzgyNzMsImV4cCI6MTYyMTg0Nzg3M30.D-RniP4L8eJ8XOdOjRXswq8LsRnPVK-QYiUr8h9fPhk
-  
+
   getProfile = async () => {
     try {
       const requestProfile = await fetch(
-        "https://striveschool-api.herokuapp.com/api/profile/me",
+        'https://striveschool-api.herokuapp.com/api/profile/me',
         {
-          method: "GET",
+          method: 'GET',
           headers: {
-            Authorization: "Bearer " + this.state.bearerToken,
+            Authorization: 'Bearer ' + this.state.bearerToken,
           },
         }
       );
@@ -96,9 +96,11 @@ class App extends React.Component {
 		<>
 		<Router>
 			<MyNavbar name={this.state.profile.name} 
+      image={this.state.profile.image}
       query={this.state.query}
       onChangeQuery={this.handleChangeQuery}/>
-			<Container sm="fluid">
+			<Container sm="fluid" style={{marginTop: "8vh"}} className="pt-2" 
+      >
         {(this.state.query.length === 0 )&& <Ad/>}
 			<Route render={(routerProps) => <Profile
 										profile={this.state.profile}
