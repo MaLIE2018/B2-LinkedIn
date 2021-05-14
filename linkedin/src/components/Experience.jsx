@@ -1,26 +1,24 @@
 import React, { Component } from "react";
 import Box from "../components/parts/Box";
 import ItemsList from "../components/parts/ItemsList";
+import ModalExperience from "./ModelExperience";
 class Experience extends Component {
   state = {
     experiences: [],
+    currentExperience: {},
+    updated: false,
+    open: false,
   };
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.updated !== this.state.updated) {
+      this.postExp();
+    }
+  }
 
   postExp = async () => {
     try {
-      // const requestProfile = await fetch(
-      //   "https://striveschool-api.herokuapp.com/api/profile/me",
-      //   {
-      //     method: "GET",
-      //     headers: {
-      //       Authorization:
-      //         "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDlhNWViM2RmY2NjNTAwMTVhNmJiYmEiLCJpYXQiOjE2MjA3Mjk1MjQsImV4cCI6MTYyMTkzOTEyNH0.boEO9mTiItNdEDrhQcw1KIvBKIGJ0dCkRW7d3cNzv0M",
-      //     },
-      //   }
-      // );
-      // if (requestProfile.ok) {
-      //   const response = await requestProfile.json();
-      const identity = "this.props.profileId";
+      const identity = this.props.profileId;
       const newUrl =
         "https://striveschool-api.herokuapp.com/api/profile/" +
         identity +
@@ -28,15 +26,14 @@ class Experience extends Component {
       const response = await fetch(newUrl, {
         method: "GET",
         headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDlhNWViM2RmY2NjNTAwMTVhNmJiYmEiLCJpYXQiOjE2MjA3Mjk1MjQsImV4cCI6MTYyMTkzOTEyNH0.boEO9mTiItNdEDrhQcw1KIvBKIGJ0dCkRW7d3cNzv0M",
+          Authorization: "Bearer " + this.props.bearerToken,
           "Content-Type": "application/json",
         },
       });
       if (response.ok) {
         const data = await response.json();
         this.setState((state) => {
-          return { experiences: data };
+          return { experiences: data, updated: false };
         });
       }
     } catch (error) {
@@ -47,23 +44,53 @@ class Experience extends Component {
   componentDidMount() {
     this.postExp();
   }
-  handleClick = (e) => {
+
+  handleEditButtonClick = (e, item = {}) => {
     e.preventDefault();
-    console.log("hallo");
+    this.setState((state) => {
+      return { currentExperience: item, open: true };
+    });
   };
+
+  handleShowModal = () => {
+    this.setState((state) => {
+      return {
+        open: !this.state.open,
+      };
+    });
+  };
+
+  handleUpdate = (bool) => {
+    console.log("Updating...");
+    this.setState((state) => {
+      return { updated: bool, open: false, currentExperience: {} };
+    });
+  };
+
   render() {
     return this.state.experiences.length !== 0 ? (
       <Box
         add={true}
+        onEditButtonClick={this.handleEditButtonClick}
         title='Experience'
-        children={
-          <ItemsList
-            rounded={true}
-            edit={true}
-            onEditButtonClick={this.handleClick}
-            items={this.state.experiences}
-          />
-        }
+        render={(state) => (
+          <>
+            <ItemsList
+              rounded={false}
+              edit={true}
+              onEditButtonClick={this.handleEditButtonClick}
+              items={this.state.experiences}
+            />
+            <ModalExperience
+              profileId={this.props.profileId}
+              bearerToken={this.props.bearerToken}
+              onUpdate={this.handleUpdate}
+              item={this.state.currentExperience}
+              open={this.state.open}
+              onShowModal={this.handleShowModal}
+            />
+          </>
+        )}
       />
     ) : null;
   }
