@@ -8,6 +8,7 @@ import {BrowserRouter as Router,Route, Switch} from "react-router-dom"
 import React from "react"
 import Search from './pages/Search'
 import Ad from './components/Ad';
+import { expsUrl, getExperiences, getProfiles, profiles } from './helper/fetchData';
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -19,7 +20,9 @@ class App extends React.Component {
       posts:[],
       query: "",
       currProfile:[],
-      currProfileId: undefined
+      currProfileId: undefined,
+      profiles: [],
+      experiences:[]
     };
   }
   // 609a5eb3dfccc50015a6bbba Ankit
@@ -88,9 +91,17 @@ class App extends React.Component {
     }
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     this.getMyProfile();
     this.getPosts()
+    let profiles = await getProfiles(this.state.bearerToken)
+    this.setState((state) => {return { 
+      profiles: profiles
+    }})
+    let exps = await getExperiences(this.state.bearerToken, expsUrl)
+    this.setState((state) => {return { 
+      experiences: exps
+    }})
   }
   componentDidUpdate(prevProps, prevState){
     if (this.state.didUpdate !== prevState.didUpdate){
