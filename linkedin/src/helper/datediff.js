@@ -18,11 +18,15 @@ export default dateDiff
 
 
 export const checkImg = async(url) => {
-  
+  try {
     const res = await fetch(url);
     if (res.ok) {
-      return url
+      return true
     }else{
-      return "https://via.placeholder.com/150"
+      return false
     }
+  } catch (error) {
+      console.log(error)
+  }
+    
 }

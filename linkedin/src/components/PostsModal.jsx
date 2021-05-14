@@ -7,9 +7,12 @@ function PostsModal(props) {
   const [editor, setEdit] = useState(false);
 
   useEffect(() => {
-    if (props.currentPost?.text) {
+    if (
+      props?.currentPost?.text &&
+      document.querySelector("#postText")?.value
+    ) {
       document.querySelector("#postText").value = props.currentPost.text;
-      if (props.currentProfileId === props.currentPost.user._id) {
+      if (props.currentProfileId === props.currentPost?.user?._id) {
         setEdit(true);
       }
     }
@@ -20,8 +23,9 @@ function PostsModal(props) {
     props.onHandleShowModal();
   };
 
-  const handleUpdatePost = (e) => {
-    props.onUpdatePost(e);
+  const handleUpdatePost = (e, method) => {
+    props.onHandleUpdatePost(e, method, props.currentPost._id);
+    props.onHandleShowModal();
   };
 
   const handleFileUpload = (e) => {
@@ -38,9 +42,7 @@ function PostsModal(props) {
           <Row className='d-flex flex-nowrap mx-1'>
             <Col md={1} className='pl-0'>
               <img
-                src={
-                  editor ? props.profile.image : props.currentPost?.user?.image
-                }
+                src={props.profile.image}
                 alt=''
                 className={"rounded-circle"}
                 style={{ height: "50px" }}
@@ -48,9 +50,7 @@ function PostsModal(props) {
             </Col>
             <Col md={11} className='ml-2'>
               <div>
-                <span className='font-weight-bolder'>
-                  {editor ? props.profile.name : props.currentPost?.user?.name}
-                </span>
+                <span className='font-weight-bolder'>{props.profile.name}</span>
                 <Button
                   style={{ borderRadius: "50px", marginRight: "10px" }}
                   variant='outline-dark'
@@ -118,21 +118,13 @@ function PostsModal(props) {
                   <Button
                     variant={"primary"}
                     className='rounded-pill float-right'
-                    onClick={(e) =>
-                      props.onHandleUpdatePost(
-                        e,
-                        "DELETE",
-                        props.currentPost._id
-                      )
-                    }>
+                    onClick={(e) => handleUpdatePost(e, "DELETE")}>
                     Delete
                   </Button>
                   <Button
                     variant={"primary"}
                     className='rounded-pill float-right'
-                    onClick={(e) =>
-                      props.onHandleUpdatePost(e, "PUT", props.currentPost._id)
-                    }>
+                    onClick={(e) => handleUpdatePost(e, "PUT")}>
                     Edit
                   </Button>
                 </>
