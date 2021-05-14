@@ -4,6 +4,7 @@ import AddToYourFeed from "../components/AddToYourFeed";
 import MyNewsFeed from "./../components/MyNewsFeed";
 import Box from "./../components/parts/Box";
 import Posts from "./../components/Posts";
+import { checkImg } from "../helper/datediff";
 class Feed extends Component {
   state = {
     posts: [],
@@ -11,18 +12,26 @@ class Feed extends Component {
   };
 
   getPosts = async () => {
-    const requestPosts = await fetch(
-      "https://striveschool-api.herokuapp.com/api/posts/",
-      {
-        method: "GET",
-        headers: {
-          Authorization: "Bearer " + this.props.bearerToken,
-        },
+    try {
+      const requestPosts = await fetch(
+        "https://striveschool-api.herokuapp.com/api/posts/",
+        {
+          method: "GET",
+          headers: {
+            Authorization: "Bearer " + this.props.bearerToken,
+          },
+        }
+      );
+      if (requestPosts.ok) {
+        let resp = await requestPosts.json();
+        resp = await resp.filter((post) => checkImg(post.image));
+        this.setState({
+          posts: resp.reverse(),
+          updated: false,
+        });
       }
-    );
-    if (requestPosts.ok) {
-      const resp = await requestPosts.json();
-      this.setState({ posts: resp.reverse(), updated: false });
+    } catch (error) {
+      console.log(error);
     }
   };
   componentDidMount = () => {
