@@ -66,48 +66,48 @@ class MyNewsFeed extends React.Component {
     }
   };
 
-  createPost = async (e) => {
-    e.preventDefault();
-    if (this.state.post.text.length > 10) {
-      try {
-        let response = await fetch(
-          "https://striveschool-api.herokuapp.com/api/posts/",
-          {
-            method: "POST",
-            headers: {
-              Authorization: "Bearer " + this.props.bearerToken,
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(this.state.post),
-          }
-        );
-        if (response.ok) {
-          if (this.state.formData !== undefined) {
-            const data = await response.json();
-            const id = data._id;
-            let newRes = await fetch(
-              "https://striveschool-api.herokuapp.com/api/posts/" + id,
-              {
-                method: "POST",
-                headers: {
-                  Authorization: "Bearer " + this.props.bearerToken,
-                },
-                body: this.state.formData,
-              }
-            );
-            if (newRes.ok) {
-              console.log("FileUploaded");
-            }
-            this.props.onHandleUpdate(e, true);
-          }
-        } else {
-          console.log("Something went wrong!");
-        }
-      } catch (error) {
-        console.log(`Something went wrong! ${error}`);
-      }
-    }
-  };
+  // createPost = async (e) => {
+  //   e.preventDefault();
+  //   if (this.state.post.text.length > 10) {
+  //     try {
+  //       let response = await fetch(
+  //         "https://striveschool-api.herokuapp.com/api/posts/",
+  //         {
+  //           method: "POST",
+  //           headers: {
+  //             Authorization: "Bearer " + this.props.bearerToken,
+  //             "Content-Type": "application/json",
+  //           },
+  //           body: JSON.stringify(this.state.post),
+  //         }
+  //       );
+  //       if (response.ok) {
+  //         if (this.state.formData !== undefined) {
+  //           const data = await response.json();
+  //           const id = data._id;
+  //           let newRes = await fetch(
+  //             "https://striveschool-api.herokuapp.com/api/posts/" + id,
+  //             {
+  //               method: "POST",
+  //               headers: {
+  //                 Authorization: "Bearer " + this.props.bearerToken,
+  //               },
+  //               body: this.state.formData,
+  //             }
+  //           );
+  //           if (newRes.ok) {
+  //             console.log("FileUploaded");
+  //           }
+  //           this.props.onHandleUpdate(e, true);
+  //         }
+  //       } else {
+  //         console.log("Something went wrong!");
+  //       }
+  //     } catch (error) {
+  //       console.log(`Something went wrong! ${error}`);
+  //     }
+  //   }
+  // };
 
   handleFileUpload = (e) => {
     e.preventDefault();
@@ -125,6 +125,10 @@ class MyNewsFeed extends React.Component {
     this.setState((state) => {
       return {
         post: { text: e.target.value },
+        currentPost: {
+          ...this.state.currentPost,
+          text: e.target.value,
+        },
       };
     });
   };
@@ -277,14 +281,14 @@ class MyNewsFeed extends React.Component {
           currentPost={this.state.currentPost}
           onHandleUpdatePost={this.handleUpdatePost}
           currentProfileId={this.props.profile._id}
-          onCreatePost={this.createPost}
+          // onCreatePost={this.createPost}
           onHandleFileUpload={this.handleFileUpload}
           open={this.state.showModal}
           onHandleShowModal={this.handleShowModal}
           onHandleChange={this.handleChange}
           rounded={this.props.rounded}
           profile={this.props.profile}
-          text={this.props.text}
+          text={this.state.currentPost.text}
         />
       </>
     );
