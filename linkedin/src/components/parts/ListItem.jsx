@@ -20,9 +20,9 @@ class ListItem extends Component {
           <Col md={2} className='pl-0'>
             <img
               src={this.props.item.image}
-              alt=''
+              alt='Experience'
               className={this.props.rounded && "rounded-circle"}
-              style={{ height: "50px" }}
+              style={{ height: "50px", maxWidth: "100px" }}
             />
           </Col>
           <Col md={10} className='ml-2'>

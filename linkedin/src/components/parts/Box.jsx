@@ -11,6 +11,7 @@ class Box extends Component {
     this.state = {
       edit: true,
       openCollapse: false,
+      item: this.props.item,
     };
   }
 
@@ -36,13 +37,15 @@ class Box extends Component {
               <div className='d-flex'>
                 <div>{title}</div>
                 {this.props.edit && <EditButton />}
-                {this.props.add && <AddButton />}
+                {this.props.add && (
+                  <AddButton onEditButtonClick={this.props.onEditButtonClick} />
+                )}
               </div>
             </Card.Title>
           )}
           {this.props?.subtitle && <span>{this.props.subtitle}</span>}
           {this.props.children}
-          {this.props.render(this.state.openCollapse)}
+          {this.props.render(this.state)}
         </Card.Body>
         {footerText !== undefined && (
           <BoxFooter

@@ -2,17 +2,20 @@ import React, { Component } from "react";
 import Box from "./parts/Box";
 import { Row } from "react-bootstrap";
 import { Col, Form, FormControl, Button } from "react-bootstrap";
+import PostsModal from "./PostsModal";
 
 class Posts extends Component {
   state = {
     post: {
       text: "",
     },
+    formData: undefined,
+    showModal: false,
   };
 
   createPost = async (e) => {
     e.preventDefault();
-    if (this.state.post.text.length > 10) {
+    if (this.state.post.text.length >= 10) {
       try {
         let response = await fetch(
           "https://striveschool-api.herokuapp.com/api/posts/",
@@ -25,9 +28,24 @@ class Posts extends Component {
             body: JSON.stringify(this.state.post),
           }
         );
-
         if (response.ok) {
-          console.log("You created");
+          if (this.state.formData !== undefined) {
+            const data = await response.json();
+            const id = data._id;
+            let newRes = await fetch(
+              "https://striveschool-api.herokuapp.com/api/posts/" + id,
+              {
+                method: "POST",
+                headers: {
+                  Authorization: "Bearer " + this.props.bearerToken,
+                },
+                body: this.state.formData,
+              }
+            );
+            if (newRes.ok) {
+              console.log("FileUploaded");
+            }
+          }
           this.props.onHandleUpdate(e, true);
         } else {
           console.log("Something went wrong!");
@@ -37,10 +55,31 @@ class Posts extends Component {
       }
     }
   };
+
+  handleFileUpload = (e) => {
+    e.preventDefault();
+    const file = e.currentTarget.files[0];
+    let form_data = new FormData();
+    form_data.append("post", file);
+    this.setState((state) => {
+      return {
+        formData: form_data,
+      };
+    });
+  };
+
   handleChange = (e) => {
     this.setState((state) => {
       return {
         post: { text: e.target.value },
+      };
+    });
+  };
+
+  handleShowModal = () => {
+    this.setState((state) => {
+      return {
+        showModal: !this.state.showModal,
       };
     });
   };
@@ -63,15 +102,13 @@ class Posts extends Component {
               <Col md={11} className='ml-2'>
                 <Form inline>
                   <FormControl
-                    type='text'
+                    type='button'
                     placeholder='Start a post'
-                    className='mr-sm-2 rounded-pill flex-grow-1'
-                    onChange={this.handleChange}
+                    className='mr-sm-2 rounded-pill flex-grow-1 text-left'
+                    onClick={this.handleShowModal}
                     style={{ height: "50px" }}
+                    value='Start a post'
                   />
-                  <Button variant='outline-success' onClick={this.createPost}>
-                    Post
-                  </Button>
                 </Form>
               </Col>
             </Row>
@@ -80,6 +117,16 @@ class Posts extends Component {
                 Posts
               </Button>
             </Row>
+            <PostsModal
+              onCreatePost={this.createPost}
+              onHandleFileUpload={this.handleFileUpload}
+              open={this.state.showModal}
+              onHandleShowModal={this.handleShowModal}
+              onHandleChange={this.handleChange}
+              rounded={this.props.rounded}
+              profile={this.props.profile}
+              text={this.state.post.text}
+            />
           </>
         )}
       />
