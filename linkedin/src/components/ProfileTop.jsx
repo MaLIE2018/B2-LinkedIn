@@ -71,7 +71,7 @@ export default class ProfileTop extends Component {
                   onClick={this.handleShowModal}
                 />
                 <CameraIcon classname={"cameraIcon"} />
-                <PencilIcon classname={"Pencil"} />
+                <PencilIcon classname={"Pencil"} editProfileImage={this.handleShowModal}/>
               </Col>
               <Col id='ProfileInfo' xs={12}>
                 <h3>
@@ -100,8 +100,6 @@ export default class ProfileTop extends Component {
                     Background='outline-dark'
                     Border='dark'
                   />
-                  {/* <DropdownButton Name="More..." Background="outline-dark" /> */}
-
                   <Button
                     style={{ borderRadius: "50px", marginRight: "10px" }}
                     variant='outline-dark'>

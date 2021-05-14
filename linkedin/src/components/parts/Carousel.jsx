@@ -16,17 +16,9 @@ export default class CarouselBadge extends Component {
   render() {
     const { items } = this.state;
     return (
-      <Carousel className='carousel' itemsToShow={2}>
+      <Carousel className='carousel pt-3 pb-3' itemsToShow={2}>
         {items.map((item) => (
           <div key={item.id}>
-            {/* <Alert variant="info">Jumbo</Alert> */}
-            {/* 
-						<img
-							className=""
-							src="https://source.unsplash.com/user/erondu/600x150"
-							alt=""
-						/> */}
-
             <span>
               <div className='alert alert-info' role='alert'>
                 A simple info alert—check it out! A simple info alert—check it
