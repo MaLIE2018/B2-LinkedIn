@@ -27,7 +27,7 @@ class Profile extends Component {
                 />
                 <About bio={this.props.profile.bio} />
                 <Dashboard />
-                <Activity />
+                <Activity profile={this.props.profile} />
                 <Experience
                   profileId={profileId}
                   bearerToken={this.props.bearerToken}
