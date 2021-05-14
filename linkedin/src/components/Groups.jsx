@@ -10,8 +10,11 @@ class Groups extends Component {
       <Box
         footerText={"Discover more"}
         padding={false}
+        stickyTop={true}
         render={(state) => (
-          <Card className='mt-2' style={{ border: "none" }}>
+          <Card
+            className='mt-2 sticky-top'
+            style={{ border: "none", top: "9vh" }}>
             <ListGroup variant='flush' className='underline'>
               <ListGroup.Item>
                 <Card.Link className='text-primary' href='#'>

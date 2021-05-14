@@ -1,6 +1,7 @@
 import { Component } from "react";
 import Carousel from "react-elastic-carousel";
 import "../../css/ProfileTop.css";
+import Box from "./Box";
 
 export default class CarouselBadge extends Component {
   state = {
@@ -25,7 +26,7 @@ export default class CarouselBadge extends Component {
 							className=""
 							src="https://source.unsplash.com/user/erondu/600x150"
 							alt=""
-						/> */}
+              /> */}
 
             <span>
               <div className='alert alert-info' role='alert'>
