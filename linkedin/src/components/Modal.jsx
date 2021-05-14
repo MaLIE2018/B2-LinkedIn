@@ -59,7 +59,7 @@ class Modal extends Component {
   render() {
     return (
       <div className="pe-form-footer__actions display-flex flex-column justify-space-between">
-        <Button
+        {/* <Button
           variant="outline-secondary"
           className="rounded-pill"
           onClick={this.handleDelete}
@@ -72,7 +72,7 @@ class Modal extends Component {
           onClick={this.handleUpdate}
         >
           Save
-        </Button>
+        </Button> */}
       </div>
     );
   }
