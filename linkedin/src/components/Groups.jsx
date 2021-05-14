@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { ListGroup } from "react-bootstrap";
 import { Card } from "react-bootstrap";
-import AddButton from "./parts/AddButton";
 import Box from "./parts/Box";
 
 class Groups extends Component {
