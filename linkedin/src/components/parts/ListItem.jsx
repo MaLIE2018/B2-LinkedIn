@@ -3,6 +3,7 @@ import { ListGroup, Col, Row, Button } from "react-bootstrap";
 import EditButton from "./EditButton";
 import { format } from "date-fns";
 import { AddOutline } from "react-ionicons";
+import { Link } from "react-router-dom";
 class ListItem extends Component {
   render() {
     const edit = this.props?.edit;
@@ -28,7 +29,7 @@ class ListItem extends Component {
           <Col md={10} className='ml-2'>
             {/* If this prop exist its a person */}
             {this.props.item.name && (
-              <a href='/'>
+              <a as={Link} href={`/profile/${this.props.item._id}`}>
                 <div className='font-weight-bold d-flex flex-row'>
                   {this.props.item.name} {" · "}
                   <span className='text-muted font-weight-light'>2nd</span>

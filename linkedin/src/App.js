@@ -4,7 +4,7 @@ import MyNavbar from './components/MyNavbar';
 import Footer from './components/Footer';
 import './css/App.css';
 import Feed from './pages/Feed'
-import {BrowserRouter as Router,Route} from "react-router-dom"
+import {BrowserRouter as Router,Route, Switch} from "react-router-dom"
 import React from "react"
 import Search from './pages/Search'
 import Ad from './components/Ad';
@@ -13,17 +13,18 @@ class App extends React.Component {
     super(props);
     this.state = {
       didUpdate: false,
-      profile: [],
+      myProfile: [],
       bearerToken:
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDk4ZjEwNzYxOWU1ZDAwMTUxZjhmN2UiLCJpYXQiOjE2MjA2MzU5MTEsImV4cCI6MTYyMTg0NTUxMX0.U8l7p7PoVQQdWQWKZJviwS7_FVcCIEb4ytol9_fZkyM",
       posts:[],
-      query: ""
+      query: "",
+      currProfile:[],
     };
   }
   // 609a5eb3dfccc50015a6bbba Ankit
   // Hasib eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDk4ZmE0MTYxOWU1ZDAwMTUxZjhmN2YiLCJpYXQiOjE2MjA2MzgyNzMsImV4cCI6MTYyMTg0Nzg3M30.D-RniP4L8eJ8XOdOjRXswq8LsRnPVK-QYiUr8h9fPhk
 
-  getProfile = async () => {
+  getMyProfile = async () => {
     try {
       const requestProfile = await fetch(
         'https://striveschool-api.herokuapp.com/api/profile/me',
@@ -36,7 +37,7 @@ class App extends React.Component {
       );
       if (requestProfile.ok) {
         const response = await requestProfile.json();
-        this.setState({ profile: response, didUpdate: false });
+        this.setState({ myProfile: response, didUpdate: false });
       }
     } catch (error) {
       console.log(error);
@@ -67,12 +68,12 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    this.getProfile();
+    this.getMyProfile();
     this.getPosts()
   }
   componentDidUpdate(prevProps, prevState){
     if (this.state.didUpdate !== prevState.didUpdate){
-      this.getProfile()
+      this.getMyProfile()
       this.getPosts()
     }
   }
@@ -95,8 +96,8 @@ class App extends React.Component {
 	return (
 		<>
 		<Router>
-			<MyNavbar name={this.state.profile.name} 
-      image={this.state.profile.image}
+			<MyNavbar name={this.state.myProfile.name} 
+      image={this.state.myProfile.image}
       query={this.state.query}
       onChangeQuery={this.handleChangeQuery}/>
 			<Container sm="fluid" style={{marginTop: "8vh"}} className="pt-2" 
@@ -104,19 +105,26 @@ class App extends React.Component {
         {(this.state.query.length === 0 )&& <Ad title="Need Developers ASAP? Hire the top 3% of 
         developers in 48 hours. $0
           Recruiting fee. Start now."/>}
+      <Switch>
 			<Route render={(routerProps) => <Profile
-										profile={this.state.profile}
+										profile={this.state.myProfile}
 										bearerToken={this.state.bearerToken}
                     onDidUpdate={this.handleUpdate}
-                  />} path="/profile"/>
+                  />} exact path={["/profile"]}/>
+      <Route render={(routerProps) => <Profile
+										profile={this.state.currProfile}
+										bearerToken={this.state.bearerToken}
+                    onDidUpdate={this.handleUpdate}
+                  />} path={["/profile/:id"]}/>
+      </Switch>
 			<Route render={(routerProps) => <Feed
-										profile={this.state.profile}
+										profile={this.state.myProfile}
                     posts={this.state.posts}
 										bearerToken={this.state.bearerToken}
                     onDidUpdate={this.handleUpdate}
                   />} exact path={["/feed","/"]}/>
       <Route render={(routerProps) => <Search
-										profile={this.state.profile}
+										profile={this.state.myProfile}
                     posts={this.state.posts}
 										bearerToken={this.state.bearerToken}
                   />} exact path={["/Search/q=:query"]}/>
