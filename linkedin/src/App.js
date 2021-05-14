@@ -6,6 +6,7 @@ import './css/App.css';
 import Feed from './pages/Feed'
 import {BrowserRouter as Router,Route} from "react-router-dom"
 import React from "react"
+import Search from './pages/Search'
 class App extends React.Component {
 	constructor(props) {
     super(props);
@@ -14,6 +15,8 @@ class App extends React.Component {
       profile: [],
       bearerToken:
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDk4ZjEwNzYxOWU1ZDAwMTUxZjhmN2UiLCJpYXQiOjE2MjA2MzU5MTEsImV4cCI6MTYyMTg0NTUxMX0.U8l7p7PoVQQdWQWKZJviwS7_FVcCIEb4ytol9_fZkyM",
+      posts:[],
+      query:""
     };
   }
   // 609a5eb3dfccc50015a6bbba Ankit
@@ -38,12 +41,38 @@ class App extends React.Component {
       console.log(error);
     }
   };
+
+  getPosts = async () => {
+    try {
+      const requestPosts = await fetch(
+        "https://striveschool-api.herokuapp.com/api/posts/",
+        {
+          method: "GET",
+          headers: {
+            Authorization: "Bearer " + this.state.bearerToken,
+          },
+        }
+      );
+      if (requestPosts.ok) {
+        let resp = await requestPosts.json();
+        this.setState({
+          posts: resp.reverse(),
+          didUpdate: false,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   componentDidMount() {
     this.getProfile();
+    this.getPosts()
   }
   componentDidUpdate(prevProps, prevState){
     if (this.state.didUpdate !== prevState.didUpdate){
       this.getProfile()
+      this.getPosts()
     }
   }
 
@@ -53,11 +82,21 @@ class App extends React.Component {
     });
   };
 
+  handleChangeQuery = (e) => {
+      e.preventDefault();
+      this.setState((state) => {
+        return { query: e.target.value,}
+          
+      })
+  }
+
 	render(){
 	return (
 		<>
 		<Router>
-			<MyNavbar name={this.state.profile.name}/>
+			<MyNavbar name={this.state.profile.name} 
+      query={this.state.search}
+      onChangeQuery={this.handleChangeQuery}/>
 			<Container sm="fluid">
 			<Route render={(routerProps) => <Profile
 										profile={this.state.profile}
@@ -66,8 +105,14 @@ class App extends React.Component {
                   />} path="/profile"/>
 			<Route render={(routerProps) => <Feed
 										profile={this.state.profile}
+                    posts={this.state.posts}
 										bearerToken={this.state.bearerToken}
+                    onDidUpdate={this.handleUpdate}
                   />} exact path={["/feed","/"]}/>
+      <Route render={(routerProps) => <Search
+										profile={this.state.profile}
+										bearerToken={this.state.bearerToken}
+                  />} exact path={["/Search/q=:query"]}/>
 			
 				<Footer />
 			</Container>

@@ -5,37 +5,14 @@ import MyNewsFeed from "./../components/MyNewsFeed";
 import Box from "./../components/parts/Box";
 import Posts from "./../components/Posts";
 import { checkImg } from "../helper/datediff";
+import { CaretDownOutline } from "react-ionicons";
 class Feed extends Component {
   state = {
     posts: [],
-    updated: false,
   };
 
-  getPosts = async () => {
-    try {
-      const requestPosts = await fetch(
-        "https://striveschool-api.herokuapp.com/api/posts/",
-        {
-          method: "GET",
-          headers: {
-            Authorization: "Bearer " + this.props.bearerToken,
-          },
-        }
-      );
-      if (requestPosts.ok) {
-        let resp = await requestPosts.json();
-        resp = await resp.filter((post) => checkImg(post.image));
-        this.setState({
-          posts: resp.reverse(),
-          updated: false,
-        });
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
   componentDidMount = () => {
-    this.getPosts();
+    // this.getPosts();
     document.title = "Linkedin - Feed";
   };
 
@@ -46,7 +23,7 @@ class Feed extends Component {
   };
 
   getMyPosts = () => {
-    const posts = this.state.posts;
+    const posts = this.props.posts;
     this.setState((state) => {
       return {
         posts: posts.filter((post) => {
@@ -60,9 +37,7 @@ class Feed extends Component {
 
   handleUpdate = (e, bool) => {
     e.preventDefault();
-    this.setState((state) => {
-      return { updated: bool };
-    });
+    this.props.onDidUpdate(bool);
   };
 
   render() {
@@ -79,8 +54,28 @@ class Feed extends Component {
             onPostsClick={this.getMyPosts}
             onHandleUpdate={this.handleUpdate}
           />
+          <Row className='m-0 pr-2 pl-2'>
+            <Col md={10} className='p-0'>
+              <hr />
+            </Col>
+            <Col md={2}>
+              <button
+                className='btn d-flex flex-row font-weight-bold px-0'
+                style={{ fontSize: ".8rem" }}>
+                <span className='text-nowrap font-weight-light'>Sort by: </span>{" "}
+                Top
+                <CaretDownOutline
+                  color={"#00000"}
+                  title={"caret"}
+                  height='15px'
+                  width='15px'
+                />
+              </button>
+            </Col>
+          </Row>
+
           <MyNewsFeed
-            posts={this.state.posts}
+            posts={this.props.posts}
             bearerToken={this.props.bearerToken}
             profile={this.props.profile}
             rounded={true}

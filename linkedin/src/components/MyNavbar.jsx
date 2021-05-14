@@ -18,8 +18,17 @@ import {
 } from "react-bootstrap";
 import mainLogo from "../assets/img/Logo.png";
 import "../css/MyNavbar.css";
-
+import { withRouter } from "react-router-dom";
 class MyNavbar extends React.Component {
+  handleChangeQuery = (e) => {
+    this.props.onChangeQuery(e);
+    if (e.target.value <= 1) {
+      this.props.history.push("/");
+    } else {
+      this.props.history.push("/search/q=" + e.target.value);
+    }
+  };
+
   state = {};
   render() {
     return (
@@ -34,7 +43,11 @@ class MyNavbar extends React.Component {
             <Navbar.Collapse id='basic-navbar-nav'>
               <Nav className='mr-auto'>
                 <Form className='searchBar'>
-                  <FormControl type='text' placeholder='Search'></FormControl>
+                  <FormControl
+                    type='text'
+                    placeholder='Search'
+                    value={this.props.query}
+                    onChange={this.handleChangeQuery}></FormControl>
                 </Form>
               </Nav>
               <Nav>
@@ -159,4 +172,4 @@ class MyNavbar extends React.Component {
   }
 }
 
-export default MyNavbar;
+export default withRouter(MyNavbar);
