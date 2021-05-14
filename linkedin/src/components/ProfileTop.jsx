@@ -85,9 +85,9 @@ export default class ProfileTop extends Component {
                 <p className='d-flex align-items-center'>
                   {this.props.profile.area}
                   {" - "}
-                  {<LinkButton title={"500 connections"} />}
+                  {<LinkButton title={"500 connections"} color='#67A0D9' />}
                   {" - "}
-                  {<LinkButton title={"Contact info"} />}
+                  {<LinkButton title={"Contact info"} color='#67A0D9' />}
                 </p>{" "}
                 <span className='d-flex flex-row'>
                   <DropdownButton

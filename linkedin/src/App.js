@@ -7,6 +7,7 @@ import Feed from './pages/Feed'
 import {BrowserRouter as Router,Route} from "react-router-dom"
 import React from "react"
 import Search from './pages/Search'
+import Ad from './components/Ad';
 class App extends React.Component {
 	constructor(props) {
     super(props);
@@ -16,7 +17,7 @@ class App extends React.Component {
       bearerToken:
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDk4ZjEwNzYxOWU1ZDAwMTUxZjhmN2UiLCJpYXQiOjE2MjA2MzU5MTEsImV4cCI6MTYyMTg0NTUxMX0.U8l7p7PoVQQdWQWKZJviwS7_FVcCIEb4ytol9_fZkyM",
       posts:[],
-      query:""
+      query: ""
     };
   }
   // 609a5eb3dfccc50015a6bbba Ankit
@@ -95,9 +96,10 @@ class App extends React.Component {
 		<>
 		<Router>
 			<MyNavbar name={this.state.profile.name} 
-      query={this.state.search}
+      query={this.state.query}
       onChangeQuery={this.handleChangeQuery}/>
 			<Container sm="fluid">
+        {(this.state.query.length === 0 )&& <Ad/>}
 			<Route render={(routerProps) => <Profile
 										profile={this.state.profile}
 										bearerToken={this.state.bearerToken}

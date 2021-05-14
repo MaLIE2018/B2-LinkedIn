@@ -6,6 +6,7 @@ import Box from "./../components/parts/Box";
 import Posts from "./../components/Posts";
 import { checkImg } from "../helper/datediff";
 import { CaretDownOutline } from "react-ionicons";
+import WelcomeBox from "./../components/WelcomeBox";
 class Feed extends Component {
   state = {
     posts: [],
@@ -44,7 +45,10 @@ class Feed extends Component {
     return (
       <Row>
         <Col md={3}>
-          <Box render={(state) => <div>sometext</div>} />
+          <Box
+            padding={false}
+            render={(state) => <WelcomeBox profile={this.props.profile} />}
+          />
         </Col>
         <Col md={6}>
           <Posts

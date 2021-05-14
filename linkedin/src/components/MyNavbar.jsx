@@ -19,6 +19,7 @@ import {
 import mainLogo from "../assets/img/Logo.png";
 import "../css/MyNavbar.css";
 import { withRouter } from "react-router-dom";
+import FilterBar from "./FilterBar";
 class MyNavbar extends React.Component {
   handleChangeQuery = (e) => {
     this.props.onChangeQuery(e);
@@ -166,10 +167,8 @@ class MyNavbar extends React.Component {
               </Nav>
             </Navbar.Collapse>
           </Navbar>
-          {/* {this.props.query.length > 0 && (
-            <div style={{ height: "40px" }}>Test</div>
-          )} */}
         </Container>
+        {this.props.query.length > 0 && <FilterBar />}
       </header>
     );
   }
