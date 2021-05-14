@@ -79,6 +79,7 @@ export default class ProfileTop extends Component {
 									editProfile={this.state.editProfile}
 									editProfileOff={() => this.setState({editProfile: false})}
 									editProfileOn={() => this.setState({editProfile: true})}
+									token={this.props.bearerToken}
 								/>
 								<PencilIcon
 									classname={"Pencil"}
