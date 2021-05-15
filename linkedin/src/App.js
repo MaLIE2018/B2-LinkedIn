@@ -8,6 +8,7 @@ import {BrowserRouter as Router,Route, Switch} from "react-router-dom"
 import React from "react"
 import Search from './pages/Search'
 import Ad from './components/Ad';
+import { expsUrl, getExperiences, getProfiles, profiles } from './helper/fetchData';
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -19,6 +20,9 @@ class App extends React.Component {
       posts:[],
       query: "",
       currProfile:[],
+      currProfileId: undefined,
+      profiles: [],
+      experiences:[]
     };
   }
   // 609a5eb3dfccc50015a6bbba Ankit
@@ -38,6 +42,26 @@ class App extends React.Component {
       if (requestProfile.ok) {
         const response = await requestProfile.json();
         this.setState({ myProfile: response, didUpdate: false });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  getProfile = async () => {
+    try {
+      const requestProfile = await fetch(
+        'https://striveschool-api.herokuapp.com/api/profile/'+ this.state.currProfileId,
+        {
+          method: 'GET',
+          headers: {
+            Authorization: 'Bearer ' + this.state.bearerToken,
+          },
+        }
+      );
+      if (requestProfile.ok) {
+        const response = await requestProfile.json();
+        this.setState({ currProfile: response, didUpdate: false });
       }
     } catch (error) {
       console.log(error);
@@ -67,14 +91,25 @@ class App extends React.Component {
     }
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     this.getMyProfile();
     this.getPosts()
+    let profiles = await getProfiles(this.state.bearerToken)
+    this.setState((state) => {return { 
+      profiles: profiles
+    }})
+    let exps = await getExperiences(this.state.bearerToken, expsUrl)
+    this.setState((state) => {return { 
+      experiences: exps
+    }})
   }
   componentDidUpdate(prevProps, prevState){
     if (this.state.didUpdate !== prevState.didUpdate){
       this.getMyProfile()
       this.getPosts()
+    }
+    if(prevState.currProfileId !== this.state.currProfileId){
+      this.getProfile()
     }
   }
 
@@ -88,6 +123,12 @@ class App extends React.Component {
       e.preventDefault();
       this.setState((state) => {
         return { query: e.target.value,}
+          
+      })
+  }
+  handleCurrProfileChange = (currProfileId) => {
+      this.setState((state) => {
+        return { currProfileId: currProfileId,}
           
       })
   }
@@ -115,6 +156,8 @@ class App extends React.Component {
 										profile={this.state.currProfile}
 										bearerToken={this.state.bearerToken}
                     onDidUpdate={this.handleUpdate}
+                    currProfileId={this.state.currProfileId}
+                    onCurrProfileChange={this.handleCurrProfileChange}
                   />} path={["/profile/:id"]}/>
       </Switch>
 			<Route render={(routerProps) => <Feed
