@@ -1,36 +1,44 @@
 import {Modal, Button, Form} from "react-bootstrap";
 import React, {Component} from "react";
 
-
-
 class EditProfile extends Component {
-	state = {
-		formerName: false,
-		profile: [],
-		info: {
-			name: "",
-			surname: "",
-			title: "",
-			area: "",
-		},
-	};
+	constructor(props) {
+		super(props);
+		this.state = {
+			formerName: false,
+			profile: {
+				name: "",
+				surname: "",
+				title: "",
+				area: "",
+			},
+		};
+	}
 
-	getProfile = async (event) => {
+	getProfile = async () => {
 		try {
 			const request = await fetch(
 				"https://striveschool-api.herokuapp.com/api/profile/me",
 				{
 					method: "GET",
 					headers: {
-						Authorization: "Bearer " + this.props.token,
+						Authorization:
+							// "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDk4ZmE0MTYxOWU1ZDAwMTUxZjhmN2YiLCJpYXQiOjE2MjA2MzgyNzMsImV4cCI6MTYyMTg0Nzg3M30.D-RniP4L8eJ8XOdOjRXswq8LsRnPVK-QYiUr8h9fPhk",
+							"Bearer " + this.props.token,
 					},
 				}
 			);
 			if (request.ok) {
 				const response = await request.json();
-				this.setState({profile: response});
+				this.setState({
+					profile: {
+						name: response.name,
+						surname: response.surname,
+						title: response.title,
+						area: response.area,
+					},
+				});
 				console.log(this.state.profile);
-				console.log(this.state.profile.area.split(", "));
 			}
 		} catch (error) {
 			console.log(error);
@@ -44,32 +52,42 @@ class EditProfile extends Component {
 		const value = event.target.value;
 		const id = event.target.id;
 		this.setState({
-			info: {
-				...this.state.info,
-				[id]: value
-			}
-		})
-	}
+			profile: {
+				...this.state.profile,
+				[id]: value,
+			},
+		});
+	};
 
-	updateProfile = async () => {
-		const request = await fetch(
-			"https://striveschool-api.herokuapp.com/api/profile/me",
-			{
-				method: "PUT",
-				headers: {
-					Authorization: "Bearer " + this.props.token,
-				},
-				body: JSON.stringify(this.state.info)
+	updateProfile = async (event) => {
+		event.preventDefault();
+
+		try {
+			const request = await fetch(
+				"https://striveschool-api.herokuapp.com/api/profile/",
+				{
+					method: "PUT",
+					body: JSON.stringify(this.state.profile),
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + this.props.token,
+
+						// "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDk4ZmE0MTYxOWU1ZDAwMTUxZjhmN2YiLCJpYXQiOjE2MjA2MzgyNzMsImV4cCI6MTYyMTg0Nzg3M30.D-RniP4L8eJ8XOdOjRXswq8LsRnPVK-QYiUr8h9fPhk",
+					},
+				}
+			);
+			if (request.ok) {
+				const response = await request.json();
+				alert("Profile updated successfully");
+				this.props.editProfileOff();
+				console.log(response);
+			} else {
+				console.log("I could not updated your profile");
 			}
-		);
-		if (request.ok) {
-			console.log("Profile updated successfully");
-		} else {
-			console.log("I could not updated your profile")
+		} catch (error) {
+			console.log(error);
 		}
-	}
-
-
+	};
 
 	render() {
 		return (
@@ -89,7 +107,7 @@ class EditProfile extends Component {
 						</Modal.Title>
 					</Modal.Header>
 					<Modal.Body>
-						<form>
+						<form onSubmit={this.updateProfile}>
 							<div className="container-fluid mx-0 px-0">
 								<div className="row justify-content-between mt-4">
 									<div className="col-6 text-muted">First Name *</div>
@@ -98,18 +116,18 @@ class EditProfile extends Component {
 								<div className="row justify-content-between">
 									<div className="col-6 w-100">
 										<input
+											value={this.state.profile.name}
 											onChange={this.handleData}
 											id="name"
-											value={this.state.profile.name}
 											className="w-100"
 											type="text"
 										/>
 									</div>
 									<div className="col-6 w-100">
 										<input
+											value={this.state.profile.surname}
 											onChange={this.handleData}
 											id="surname"
-											value={this.state.profile.surname}
 											className="w-100"
 											type="text"
 										/>
