@@ -24,7 +24,7 @@ class MyNavbar extends React.Component {
   handleChangeQuery = (e) => {
     this.props.onChangeQuery(e);
     const history = this.props.history;
-    if (e.target.value > 0) {
+    if (e.target.value.length > 0) {
       if (this.state.filter === "") {
         this.props.history.push("/search/q=" + e.target.value);
       } else {
