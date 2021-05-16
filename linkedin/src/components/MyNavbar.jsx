@@ -4,9 +4,8 @@ import { People } from "react-ionicons";
 import { Briefcase } from "react-ionicons";
 import { ChatboxEllipses } from "react-ionicons";
 import { Notifications } from "react-ionicons";
-import { PersonCircle } from "react-ionicons";
 import { Keypad } from "react-ionicons";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import {
   Navbar,
   Nav,
@@ -18,19 +17,45 @@ import {
 } from "react-bootstrap";
 import mainLogo from "../assets/img/Logo.png";
 import "../css/MyNavbar.css";
-import { withRouter } from "react-router-dom";
 import FilterBar from "./FilterBar";
 class MyNavbar extends React.Component {
+  state = { filter: "" };
+
   handleChangeQuery = (e) => {
     this.props.onChangeQuery(e);
-    if (e.target.value <= 1) {
-      this.props.history.push("/");
-    } else {
-      this.props.history.push("/search/q=" + e.target.value);
+    const history = this.props.history;
+    if (e.target.value > 0) {
+      if (this.state.filter === "") {
+        this.props.history.push("/search/q=" + e.target.value);
+      } else {
+        history.push(
+          `${this.props.match.path}search/q=${this.props.query}/${this.state.filter}`
+        );
+      }
     }
   };
 
-  state = {};
+  handleFilterChange = (e) => {
+    if (e.target.id === this.state.filter) {
+      this.setState({ filter: "" });
+    } else {
+      this.setState({ filter: e.target.id });
+    }
+  };
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.filter !== this.state.filter) {
+      this.pushFilter();
+    }
+  }
+
+  pushFilter() {
+    const history = this.props.history;
+    history.push(
+      `${this.props.match.path}search/q=${this.props.query}/${this.state.filter}`
+    );
+  }
+
   render() {
     return (
       <header className='fixed-top'>
@@ -55,6 +80,7 @@ class MyNavbar extends React.Component {
                   />
                   <FormControl
                     type='text'
+                    id='search'
                     placeholder='Search'
                     value={this.props.query}
                     onChange={this.handleChangeQuery}></FormControl>
@@ -179,7 +205,13 @@ class MyNavbar extends React.Component {
             </Navbar.Collapse>
           </Navbar>
         </Container>
-        {this.props.query.length > 0 && <FilterBar />}
+        {this.props.query.length > 0 && (
+          <FilterBar
+            query={this.props.query}
+            filter={this.state.filter}
+            onFilterChange={this.handleFilterChange}
+          />
+        )}
       </header>
     );
   }

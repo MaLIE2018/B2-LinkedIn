@@ -26,7 +26,7 @@ export const checkImg = async(url) => {
       return false
     }
   } catch (error) {
-      console.log(error)
+      
   }
     
 }

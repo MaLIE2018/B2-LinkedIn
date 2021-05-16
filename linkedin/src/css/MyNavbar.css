@@ -43,3 +43,8 @@ header {
   min-height: 8vh;
   top: 0;
 }
+
+#search:focus {
+  background-color: #eef3f8;
+  box-shadow: none;
+}

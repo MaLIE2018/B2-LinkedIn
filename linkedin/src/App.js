@@ -8,7 +8,8 @@ import {BrowserRouter as Router,Route, Switch} from "react-router-dom"
 import React from "react"
 import Search from './pages/Search'
 import Ad from './components/Ad';
-import { expsUrl, getExperiences, getProfiles, profiles } from './helper/fetchData';
+import { expsUrl, getExperiences, getProfiles } from './helper/fetchData';
+import { checkImg } from './helper/datediff';
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -22,12 +23,41 @@ class App extends React.Component {
       currProfile:[],
       currProfileId: undefined,
       profiles: [],
-      experiences:[]
+      experiences:[],
+      filteredPosts: [],
+      filteredPeople:[],
     };
   }
   // 609a5eb3dfccc50015a6bbba Ankit
   // Hasib eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDk4ZmE0MTYxOWU1ZDAwMTUxZjhmN2YiLCJpYXQiOjE2MjA2MzgyNzMsImV4cCI6MTYyMTg0Nzg3M30.D-RniP4L8eJ8XOdOjRXswq8LsRnPVK-QYiUr8h9fPhk
 
+  filterPeople = () => {
+    let query = this.state.query
+    let filteredPeople = this.state.profiles.filter(p => {
+      if (p.name.toLowerCase().includes(query.toLowerCase()) || p.surname.toLowerCase().includes(query.toLowerCase())) {
+        return true}
+    })
+
+    this.setState((state) => {
+      return {
+        filteredPeople: filteredPeople
+      }
+    })
+  }
+
+  filterPosts = () => {
+    let query = this.state.query
+    let filteredPosts = this.state.posts.filter(p => {
+      if (p.text.toLowerCase().includes(query.toLowerCase()) ) {
+        return true}
+    })
+
+    this.setState((state) => {
+      return {
+        filteredPosts: filteredPosts
+      }
+    })
+  }
   getMyProfile = async () => {
     try {
       const requestProfile = await fetch(
@@ -81,8 +111,9 @@ class App extends React.Component {
       );
       if (requestPosts.ok) {
         let resp = await requestPosts.json();
+        let filteredResp = await Promise.all(resp.filter( async (post) => await checkImg(post.image)))
         this.setState({
-          posts: resp.reverse(),
+          posts: filteredResp.reverse(),
           didUpdate: false,
         });
       }
@@ -110,6 +141,10 @@ class App extends React.Component {
     }
     if(prevState.currProfileId !== this.state.currProfileId){
       this.getProfile()
+    }
+    if(prevState.query !== this.state.query){
+      this.filterPeople()
+      this.filterPosts()
     }
   }
 
@@ -167,10 +202,16 @@ class App extends React.Component {
                     onDidUpdate={this.handleUpdate}
                   />} exact path={["/feed","/"]}/>
       <Route render={(routerProps) => <Search
-										profile={this.state.myProfile}
-                    posts={this.state.posts}
+                    profiles = {this.state.filteredPeople.length !== 0?
+                      this.state.filteredPeople
+                      :
+                      this.state.profiles}
+                    posts={this.state.filteredPosts.length !== 0?
+                      this.state.filteredPosts
+                      :
+                      this.state.posts}
 										bearerToken={this.state.bearerToken}
-                  />} exact path={["/Search/q=:query"]}/>
+                  />} exact path={["/Search/q=:query","/search/q=:query/:filter"]}/>
 			
 				<Footer />
 			</Container>
