@@ -61,8 +61,4 @@ class Box extends Component {
   }
 }
 
-// Box.propTypes = {
-//   children: PropTypes.func.isRequired,
-// };
-
 export default Box;

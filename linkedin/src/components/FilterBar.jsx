@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Container, Row, Button, Col } from "react-bootstrap";
+import { withRouter } from "react-router";
 
 class FilterBar extends Component {
   render() {
@@ -8,14 +9,57 @@ class FilterBar extends Component {
         <Container sm='fluid'>
           <Row>
             <Col>
-              <Button variant='outline-secondary rounded-pill m-1 p-1 px-2'>
+              <Button
+                id='people'
+                variant={
+                  this.props.filter === "people"
+                    ? "outline-primary"
+                    : "outline-secondary"
+                }
+                className='rounded-pill m-1 p-1 px-2'
+                onClick={(e) => {
+                  this.props.onFilterChange(e);
+                }}>
                 People
               </Button>{" "}
-              <Button variant='outline-secondary rounded-pill m-1 p-1 px-2'>
+              <Button
+                id='companies'
+                className='rounded-pill m-1 p-1 px-2'
+                variant={
+                  this.props.filter === "companies"
+                    ? "outline-primary"
+                    : "outline-secondary"
+                }
+                onClick={(e) => {
+                  this.props.onFilterChange(e);
+                }}>
                 Companies
               </Button>{" "}
-              <Button variant='outline-secondary rounded-pill m-1 p-1 px-2'>
+              <Button
+                id='posts'
+                className='rounded-pill m-1 p-1 px-2'
+                variant={
+                  this.props.filter === "posts"
+                    ? "outline-primary"
+                    : "outline-secondary"
+                }
+                onClick={(e) => {
+                  this.props.onFilterChange(e);
+                }}>
                 Posts
+              </Button>{" "}
+              <Button
+                id='jobs'
+                className='rounded-pill m-1 p-1 px-2'
+                variant={
+                  this.props.filter === "posts"
+                    ? "outline-primary"
+                    : "outline-secondary"
+                }
+                onClick={(e) => {
+                  this.props.onFilterChange(e);
+                }}>
+                Jobs
               </Button>{" "}
             </Col>
           </Row>
@@ -25,4 +69,4 @@ class FilterBar extends Component {
   }
 }
 
-export default FilterBar;
+export default withRouter(FilterBar);

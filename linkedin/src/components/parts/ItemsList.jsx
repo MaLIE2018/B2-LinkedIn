@@ -28,6 +28,7 @@ class ItemsList extends Component {
         ))}
         {chunks.length > 1 ? (
           <Collapsed
+            open={this.props.open}
             children={
               <div>
                 {chunks[1].map((item) => {
@@ -45,7 +46,6 @@ class ItemsList extends Component {
                 })}
               </div>
             }
-            open={this.props.open}
           />
         ) : null}
       </ListGroup>
