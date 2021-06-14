@@ -1,54 +1,3 @@
-<<<<<<< Updated upstream
-import Profile from './pages/Profile';
-import { Container } from 'react-bootstrap';
-import MyNavbar from './components/MyNavbar';
-import Footer from './components/Footer';
-import './css/App.css';
-import Feed from './pages/Feed'
-import {BrowserRouter as Router,Route, Switch} from "react-router-dom"
-import React from "react"
-import Search from './pages/Search'
-import Ad from './components/Ad';
-import { expsUrl, getExperiences, getProfiles, profiles } from './helper/fetchData';
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-			didUpdate: false,
-			myProfile: [],
-			bearerToken:
-				"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDgwMGNjNWIxZjBmYjAwMTVkOTE3MDciLCJpYXQiOjE2MjM2NjAyNzksImV4cCI6MTYyNDg2OTg3OX0.osvUSd-sjgpYc251CFz7q1zKhVTTfGREioBRU3Vz5Gg",
-			posts: [],
-			query: "",
-			currProfile: [],
-			currProfileId: undefined,
-			profiles: [],
-			experiences: [],
-		};
-  }
-  // 609a5eb3dfccc50015a6bbba Ankit
-  // Hasib eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDk4ZmE0MTYxOWU1ZDAwMTUxZjhmN2YiLCJpYXQiOjE2MjA2MzgyNzMsImV4cCI6MTYyMTg0Nzg3M30.D-RniP4L8eJ8XOdOjRXswq8LsRnPVK-QYiUr8h9fPhk
-
-  getMyProfile = async () => {
-    try {
-      const requestProfile = await fetch(
-        'https://striveschool-api.herokuapp.com/api/profile/me',
-        {
-          method: 'GET',
-          headers: {
-            Authorization: 'Bearer ' + this.state.bearerToken,
-          },
-        }
-      );
-      if (requestProfile.ok) {
-        const response = await requestProfile.json();
-        this.setState({ myProfile: response, didUpdate: false });
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-=======
 import Profile from "./pages/Profile";
 import {Container} from "react-bootstrap";
 import MyNavbar from "./components/MyNavbar";
@@ -68,7 +17,7 @@ class App extends React.Component {
 			didUpdate: false,
 			myProfile: [],
 			bearerToken:
-				"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDk4ZjEwNzYxOWU1ZDAwMTUxZjhmN2UiLCJpYXQiOjE2MjA2MzU5MTEsImV4cCI6MTYyMTg0NTUxMX0.U8l7p7PoVQQdWQWKZJviwS7_FVcCIEb4ytol9_fZkyM",
+				"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDgwMGNjNWIxZjBmYjAwMTVkOTE3MDciLCJpYXQiOjE2MjM2NjAyNzksImV4cCI6MTYyNDg2OTg3OX0.osvUSd-sjgpYc251CFz7q1zKhVTTfGREioBRU3Vz5Gg",
 			posts: [],
 			query: "",
 			currProfile: [],
@@ -133,7 +82,6 @@ class App extends React.Component {
 			console.log(error);
 		}
 	};
->>>>>>> Stashed changes
 
 	getProfile = async () => {
 		try {
@@ -156,52 +104,6 @@ class App extends React.Component {
 		}
 	};
 
-<<<<<<< Updated upstream
-  getPosts = async () => {
-    try {
-      const requestPosts = await fetch(
-        "https://striveschool-api.herokuapp.com/api/posts/",
-        {
-          method: "GET",
-          headers: {
-            Authorization: "Bearer " + this.state.bearerToken,
-          },
-        }
-      );
-      if (requestPosts.ok) {
-        let resp = await requestPosts.json();
-        this.setState({
-          posts: resp.reverse(),
-          didUpdate: false,
-        });
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  async componentDidMount() {
-    this.getMyProfile();
-    this.getPosts()
-    let profiles = await getProfiles(this.state.bearerToken)
-    this.setState((state) => {return { 
-      profiles: profiles
-    }})
-    let exps = await getExperiences(this.state.bearerToken, expsUrl)
-    this.setState((state) => {return { 
-      experiences: exps
-    }})
-  }
-  componentDidUpdate(prevProps, prevState){
-    if (this.state.didUpdate !== prevState.didUpdate){
-      this.getMyProfile()
-      this.getPosts()
-    }
-    if(prevState.currProfileId !== this.state.currProfileId){
-      this.getProfile()
-    }
-  }
-=======
 	getPosts = async () => {
 		try {
 			const requestPosts = await fetch(
@@ -257,7 +159,6 @@ class App extends React.Component {
 			this.filterPosts();
 		}
 	}
->>>>>>> Stashed changes
 
 	handleUpdate = (bool) => {
 		this.setState((state) => {
@@ -312,31 +213,6 @@ class App extends React.Component {
 									<Profile
 										profile={this.state.currProfile}
 										bearerToken={this.state.bearerToken}
-<<<<<<< Updated upstream
-                    onDidUpdate={this.handleUpdate}
-                    currProfileId={this.state.currProfileId}
-                    onCurrProfileChange={this.handleCurrProfileChange}
-                  />} path={["/profile/:id"]}/>
-      </Switch>
-			<Route render={(routerProps) => <Feed
-										profile={this.state.myProfile}
-                    posts={this.state.posts}
-										bearerToken={this.state.bearerToken}
-                    onDidUpdate={this.handleUpdate}
-                  />} exact path={["/feed","/"]}/>
-      <Route render={(routerProps) => <Search
-										profile={this.state.myProfile}
-                    posts={this.state.posts}
-										bearerToken={this.state.bearerToken}
-                  />} exact path={["/Search/q=:query"]}/>
-			
-				<Footer />
-			</Container>
-			</Router>
-		</>
-	);
-}
-=======
 										onDidUpdate={this.handleUpdate}
 										currProfileId={this.state.currProfileId}
 										onCurrProfileChange={this.handleCurrProfileChange}
@@ -383,7 +259,6 @@ class App extends React.Component {
 			</>
 		);
 	}
->>>>>>> Stashed changes
 }
 
 export default App;
