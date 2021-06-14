@@ -1,180 +1,124 @@
-import React, { Component } from "react";
-import Box from "./parts/Box";
-import { Row } from "react-bootstrap";
-import { Col, Form, FormControl, Button } from "react-bootstrap";
-import PostsModal from "./PostsModal";
-import {
-  CalendarOutline,
-  DocumentTextOutline,
-  FilmOutline,
-  ImageOutline,
-} from "react-ionicons";
+import { Component } from "react";
+import "./Post.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import PhotoSizeSelectActualOutlinedIcon from "@material-ui/icons/PhotoSizeSelectActualOutlined";
+import PlayArrowOutlinedIcon from "@material-ui/icons/PlayArrowOutlined";
+import EventNoteRoundedIcon from "@material-ui/icons/EventNoteRounded";
+import AssignmentRoundedIcon from "@material-ui/icons/AssignmentRounded";
+import PostModal from "./PostsModal";
 
-class Posts extends Component {
+class Post extends Component {
   state = {
-    post: {
-      text: "",
-    },
-    formData: undefined,
-    showModal: false,
+    clicked: false,
+    imgUrl: "",
+    name: "",
+    surname: "",
   };
-
-  createPost = async (e) => {
-    e.preventDefault();
-    if (this.state.post.text.length >= 10) {
-      try {
-        let response = await fetch(
-          "https://striveschool-api.herokuapp.com/api/posts/",
-          {
-            method: "POST",
-            headers: {
-              Authorization: "Bearer " + this.props.bearerToken,
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(this.state.post),
-          }
-        );
-        if (response.ok) {
-          if (this.state.formData !== undefined) {
-            const data = await response.json();
-            const id = data._id;
-            let newRes = await fetch(
-              "https://striveschool-api.herokuapp.com/api/posts/" + id,
-              {
-                method: "POST",
-                headers: {
-                  Authorization: "Bearer " + this.props.bearerToken,
-                },
-                body: this.state.formData,
-              }
-            );
-            if (newRes.ok) {
-              console.log("FileUploaded");
-            }
-          }
-          this.props.onHandleUpdate(e, true);
-        } else {
-          console.log("Something went wrong!");
-        }
-      } catch (error) {
-        console.log(`Something went wrong! ${error}`);
+  componentDidMount = async () => {
+    try {
+      let response = await fetch(
+				"https://striveschool-api.herokuapp.com/api/profile/me",
+				{
+					headers: {
+						Authorization:
+							"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDgwMGNjNWIxZjBmYjAwMTVkOTE3MDciLCJpYXQiOjE2MjM2ODEyOTAsImV4cCI6MTYyNDg5MDg5MH0._ad5M8ZLgxWXEDsme7RMMUTnuTHiP2KBBEOxL2mSSEk",
+					},
+				}
+			);
+      if (response.ok) {
+        let data = await response.json();
+        console.log(data);
+        this.setState({ imgUrl: data.image });
+        this.setState({ name: data.name });
+        this.setState({ surname: data.surname });
       }
+    } catch (error) {
+      alert(error);
     }
   };
-
-  handleFileUpload = (e) => {
-    e.preventDefault();
-    const file = e.currentTarget.files[0];
-    let form_data = new FormData();
-    form_data.append("post", file);
-    this.setState((state) => {
-      return {
-        formData: form_data,
-      };
-    });
-  };
-
-  handleChange = (e) => {
-    this.setState((state) => {
-      return {
-        post: { text: e.target.value },
-      };
-    });
-  };
-
-  handleShowModal = () => {
-    this.setState((state) => {
-      return {
-        showModal: !this.state.showModal,
-      };
-    });
-  };
-
   render() {
     return (
-      <Box
-        padding={true}
-        render={(state) => (
-          <>
-            <Row className='d-flex flex-nowrap mx-1'>
-              <Col md={1} className='pl-0'>
-                <img
-                  src={this.props.profile.image}
-                  alt=''
-                  className={this.props.rounded && "rounded-circle"}
-                  style={{ height: "50px" }}
+      <>
+        <div className="postParent mb-5">
+          <div
+            style={{
+              flexWrap: "nowrap",
+              alignItems: "center",
+              display: "flex",
+              justifyContent: "space-around",
+            }}
+            className="mt-2 mb-2"
+          >
+            <img className="postImg" src={this.state.imgUrl} />
+            <button
+              className="postBtn d-none d-md-block"
+              onClick={() => this.setState({ clicked: true })}
+            >
+              Start a post
+            </button>
+            <button
+              className="postBtn1 d-block d-md-none"
+              onClick={() => this.setState({ clicked: true })}
+            >
+              Start a post
+            </button>
+          </div>
+          <div
+            style={{
+              flexWrap: "nowrap",
+              alignItems: "center",
+              display: "flex",
+              justifyContent: "space-around",
+            }}
+          >
+            <span className="link">
+              {
+                <PhotoSizeSelectActualOutlinedIcon
+                  style={{ color: "rgb(112,181,249)" }}
                 />
-              </Col>
-              <Col md={11} className='ml-2'>
-                <Form inline>
-                  <FormControl
-                    type='button'
-                    placeholder='Start a post'
-                    className='mr-sm-2 rounded-pill flex-grow-1 text-left'
-                    onClick={this.handleShowModal}
-                    style={{ height: "50px" }}
-                    value='Start a post'
-                  />
-                </Form>
-              </Col>
-            </Row>
-            <Row className='mr-2 mt-1 d-flex justify-content-between'>
-              <Button variant='' onClick={(e) => this.props.onPostsClick(e)}>
-                <ImageOutline
-                  color={"#70B5F9"}
-                  title={"search"}
-                  height='20px'
-                  width='20px'
-                  className='mx-2'
+              }{" "}
+              Photo{" "}
+            </span>
+            <span className="link">
+              {" "}
+              {
+                <PlayArrowOutlinedIcon
+                  style={{
+                    color: "white",
+                    backgroundColor: "rgb(127,193,94)",
+                    borderRadius: "5px",
+                  }}
                 />
-                Photos
-              </Button>
-              <Button variant='' onClick={(e) => this.props.onPostsClick(e)}>
-                <FilmOutline
-                  color={"#7FC15E"}
-                  title={"search"}
-                  height='20px'
-                  width='20px'
-                  className='mr-2'
-                />
-                Video
-              </Button>
-              <Button variant='' onClick={(e) => this.props.onPostsClick(e)}>
-                <CalendarOutline
-                  color={"#E7A33E"}
-                  title={"search"}
-                  height='20px'
-                  width='20px'
-                  className='mr-2'
-                />
-                Event
-              </Button>
-              <Button variant='' onClick={(e) => this.props.onPostsClick(e)}>
-                <DocumentTextOutline
-                  color={"#F5987E"}
-                  title={"search"}
-                  height='20px'
-                  width='20px'
-                  className='mr-2'
-                />
-                Posts
-              </Button>
-            </Row>
-            <PostsModal
-              onCreatePost={this.createPost}
-              onHandleFileUpload={this.handleFileUpload}
-              open={this.state.showModal}
-              onHandleShowModal={this.handleShowModal}
-              onHandleChange={this.handleChange}
-              rounded={this.props.rounded}
-              profile={this.props.profile}
-              text={this.state.post.text}
-            />
-          </>
-        )}
-      />
+              }{" "}
+              Video
+            </span>
+            <span className="link">
+              {" "}
+              {
+                <EventNoteRoundedIcon style={{ color: "rgb(231,163,62)" }} />
+              }{" "}
+              Event{" "}
+            </span>
+            <span className="link">
+              {" "}
+              {
+                <AssignmentRoundedIcon style={{ color: "rgb(245,152,126)" }} />
+              }{" "}
+              <span className="d-none d-lg-inline-block mr-1">Write </span>{" "}
+              article
+            </span>
+          </div>
+        </div>
+        <PostModal
+          show={this.state.clicked}
+          hide={() => this.setState({ clicked: false })}
+          img={this.state.imgUrl}
+          name={this.state.name}
+          surname={this.state.surname}
+        />
+      </>
     );
   }
 }
 
-export default Posts;
+export default Post;

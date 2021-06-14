@@ -17,7 +17,7 @@ class App extends React.Component {
 			didUpdate: false,
 			myProfile: [],
 			bearerToken:
-				"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDgwMGNjNWIxZjBmYjAwMTVkOTE3MDciLCJpYXQiOjE2MjM2NjAyNzksImV4cCI6MTYyNDg2OTg3OX0.osvUSd-sjgpYc251CFz7q1zKhVTTfGREioBRU3Vz5Gg",
+				"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDgwMGNjNWIxZjBmYjAwMTVkOTE3MDciLCJpYXQiOjE2MjM2ODEyOTAsImV4cCI6MTYyNDg5MDg5MH0._ad5M8ZLgxWXEDsme7RMMUTnuTHiP2KBBEOxL2mSSEk",
 			posts: [],
 			query: "",
 			currProfile: [],
