@@ -1,3 +1,3 @@
 # B2-LinkedIn
 
-Team Effort
+https://linkedin-vert.vercel.app/
