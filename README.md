@@ -1,3 +1,16 @@
 # B2-LinkedIn
 
-https://linkedin-vert.vercel.app/
+LIVE DEMO: https://linkedin-vert.vercel.app/
+
+TechStack
+*Redux
+*React
+*Postgres SQL
+*Bootstrap
+
+Infrastructure
+FE: Vercel
+BE: Heroku
+
+
+
